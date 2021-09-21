@@ -1,0 +1,124 @@
+
+
+// ==============================
+// PARTIAL IMPORTS
+// ==============================
+
+@import '../styles/_color_variables.scss';
+@import '../styles/_font_variables.scss';
+
+
+.homePageContainer {
+
+    display             : grid;
+    grid-template-rows  : 840px repeat( 3, 1000px );  // doing pixels instead of rem keeps the
+    // row hieght at 1000px as the screen becomes smaller
+    grid-template-areas : "div1"
+                          "div2"
+                          "div3";
+    grid-column         : 1 / -1; // do this so that the child elements take up the entire
+    // screen horizontally
+
+    // ==============================
+    // div #1
+    // ==============================
+
+    .homePageContainerImageContainer {
+
+    grid-area : div1;    
+    height    : 1000px; // had to set the height to 1000px to make the background image encompass
+    // both the header and the homePageContainer div 1
+
+    // ==============================
+    // Image hero element ( full page ) that lays on top of the header element and the main element
+    // ==============================
+
+    // ****
+    // remember we are using styled jsx in the index.js file to lay the header nav elements
+    // on top of the hero image element
+    // ****
+
+    position : absolute;
+    left     : 0;
+    top      : 0;
+    right    : 0;
+    bottom   : 0;
+
+    background-image      : linear-gradient( to bottom, rgba( 61, 71, 98, 0.9 ),  rgba( 81, 91, 118, 0.9 ) ), url( ../public/images/event_hero_01.jpeg );
+    background-position   : center; 
+    background-size       : cover;
+    background-blend-mode : multiply;
+
+        .homePageContainerImageContainerH2 {
+
+            margin  : 28.0rem 0 4.0rem 0;
+            padding : 0 4.0rem 0 4.0rem;
+
+            font-family    : $font-primary-4;
+            font-size      : 3.2rem;
+            font-weight    : 700;
+            color          : $gray-225;
+            letter-spacing : 1px;
+            text-align     : center;
+
+        } // end of title
+
+    } // end of homePageContainerImageContainer
+
+    // ==============================
+    // div #2
+    // ==============================
+
+    .homePageContainerContentContainer1 {
+
+        display               : grid;
+        grid-template-rows    : min-content;
+        grid-template-columns : 1fr;
+        align-content         : center;
+        grid-area             : div2;
+        grid-column           : 2 / 12;
+
+        background-color : $blue-400;
+    
+        .homePageContainerContentContainer1H2 {
+
+            font-family    : $font-primary-4;
+            font-size      : 3.2rem;
+            font-weight    : 700;
+            color          : $gray-225;
+            letter-spacing : 1px;
+            text-align     : center;
+
+        } // end of title
+
+    } // end of homePageContainerContentContainer1
+
+    // ==============================
+    // div #3
+    // ==============================
+
+    .homePageContainerContentContainer2 {
+
+        display               : grid;
+        grid-template-rows    : min-content;
+        grid-template-columns : 1fr;
+        align-content         : center;
+        grid-area             : div3;
+
+        background-color : tomato;
+    
+        .homePageContainerContentContainer2H2 {
+
+            font-family    : $font-primary-4;
+            font-size      : 3.2rem;
+            font-weight    : 700;
+            color          : $gray-225;
+            letter-spacing : 1px;
+            text-align     : center;
+
+        } // end of title
+
+    } // end of homePageContainerContentContainer2
+
+} // end of homePageContainer
+

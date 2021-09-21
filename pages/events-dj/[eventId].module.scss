@@ -1,0 +1,102 @@
+
+// ==============================
+// PARTIAL IMPORTS
+// ==============================
+
+@import '../../styles/_color_variables.scss';
+@import '../../styles/_responsive_breakpoints.scss';
+
+
+.eventDetailsPageContainer {
+
+    grid-column : 2 / 12;
+    margin      : 12.0rem 0 12.0rem 0;
+
+    // ==============================
+    // div #1
+    // ==============================
+
+    .eventDetailsPageContainerDiv1 {
+
+        display         : flex;
+        justify-content : flex-end;
+        align-content   : center;
+        margin          : 0 0 2.5rem 0;
+
+        @media ( max-width: $bp-920 ) {
+
+            margin : 0 0 5.0rem 0;
+    
+        }
+
+        @media ( max-width: $bp-620 ) {
+
+            justify-content : flex-start;
+            margin          : 0 0 7.0rem 0;
+
+        }
+
+        > a:nth-child( 1 ) {
+
+            margin : 0 3.0rem 0 0;
+
+            color : $cyan-100;
+
+        }
+
+        > a:nth-child( 2 ) {
+
+            color : rgba( 200, 43, 59, 1 );
+
+        }
+
+    } // end of eventDetailsPageContainerDiv1
+
+    // ==============================
+    // div #2
+    // ==============================
+
+    .eventDetailsPageContainerDiv2 {
+
+        img {
+
+            width : 100%;
+
+        }
+
+        .eventDetailsPageContainerDiv2H1First {
+
+            margin : 1.5rem 0 3.0rem 0;
+
+            font-size : 3.2rem;
+    
+        } // end of eventDetailsPageContainerDiv2H1First
+
+        .eventDetailsPageContainerDiv2H1Second {
+
+            margin : 3.0rem 0 1.5rem 0;
+
+            font-size : 3.0rem;
+    
+        } // end of eventDetailsPageContainerDiv2H1Second
+
+        .eventDetailsPageContainerDiv2H1Third {
+
+            margin : 2.0rem 0 1.5rem 0;
+
+            font-size : 3.0rem;
+    
+        } // end of eventDetailsPageContainerDiv2H1Third
+
+        .eventDetailsPageContainerDiv2H1Fourth {
+
+            margin : 2.0rem 0 1.5rem 0;
+
+            font-size : 3.0rem;
+    
+        } // end of eventDetailsPageContainerDiv2H1Fourth
+
+    } // end of eventDetailsPageContainerDiv2
+
+} // end of eventDetailsPageContainer
+

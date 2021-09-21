@@ -1,0 +1,188 @@
+
+
+// ==============================
+// PARTIAL IMPORTS
+// ==============================
+
+@import '../styles/_color_variables.scss';
+@import '../styles/_font_variables.scss';
+@import '../styles/_mixins.scss';
+@import '../styles/_responsive_breakpoints.scss';
+
+
+.registerContainer {
+
+    display               : grid;
+    grid-column           : 2 / 12;
+    grid-template-rows    : auto;
+    grid-template-columns : 380px;
+    align-content         : start;
+    justify-content       : center;
+    margin                : 9.0rem 0 9.0rem 0;
+
+    @media all and ( max-width : $bp-480 ) {
+
+        grid-template-columns : 1fr;
+
+    }
+
+    .registerContainerH2 {
+
+        margin : 1.0rem 0 2.0rem 0;
+
+        font-family    : $font-primary-4;
+        font-size      : 3.2rem;
+        font-weight    : 700;
+        color          : $gray-800;
+        // letter-spacing : 2px;
+
+    } // end of title
+
+    // form
+    .registerContainerForm {
+
+        .registerContainerFormNameInputContainer,
+        .registerContainerFormEmailInputContainer,
+        .registerContainerFormPasswordInputContainer,
+        .registerContainerFormConfirmPasswordInputContainer {
+
+            position : relative;
+            margin   : 2.5rem 0 4.5rem 0;
+
+            > input {
+
+                display : block;
+                width   : 100%;
+                margin  : 0;
+                padding : 10px 10px 10px 0;
+
+                border        : none;
+                border-radius : 0;
+                border-bottom : 1px solid $gray-650;
+
+                font-family : $font-primary-4;
+                font-size   : 1.6rem;
+                font-weight : 400;
+                color       : $gray-650;
+
+                background-color : rgb( 255, 255, 255);
+
+                &:focus {
+                    outline : none;
+                }
+
+                // The general sibling combinator (~) separates two selectors and matches the
+                // second element only if it follows the first element (though not necessarily
+                // immediately), and both are children of the same parent
+
+                // use @include to call the mixin shrinkLabel above
+
+                // what this says below is that whenever the user focuses inside the input element
+                // we want to use the general sibling combinator to target the form input label
+                // element and move the label up 30px ( from 10 to -20 ) and use a transition is give
+                // the movement a nice feel
+                &:focus ~ .registerContainerFormNameInputContainerLabel,
+                &:focus ~ .registerContainerFormEmailInputContainerLabel,
+                &:focus ~ .registerContainerFormPasswordInputContainerLabel,
+                &:focus ~ .registerContainerFormConfirmPasswordInputContainerLabel {
+
+                    @include shrinkLabel();
+
+                }
+
+            } // end of input
+
+            .registerContainerFormNameInputContainerLabel,
+            .registerContainerFormEmailInputContainerLabel,
+            .registerContainerFormPasswordInputContainerLabel,
+            .registerContainerFormConfirmPasswordInputContainerLabel {
+
+                position : absolute;
+                top      : 10px;
+                left     : 0px;
+
+                font-family : $font-primary-4;
+                font-size   : 1.6rem;
+                font-weight : 400;
+                color       : $gray-650;
+
+                pointer-events : none;
+                // transition : all will target the top, font-size and color properties
+                transition     : all 300ms ease;
+
+            } // end of label
+
+            // this is here so that if the user takes the focus off the input field the
+            // form label stays in the same position or top : -20px and left : 5px
+            .registerContainerFormNameInputContainerLabelShrink,
+            .registerContainerFormEmailInputContainerLabelShrink,
+            .registerContainerFormPasswordInputContainerLabelShrink,
+            .registerContainerFormConfirmPasswordInputContainerLabelShrink {
+
+                position : absolute;
+                top      : -20px;
+                left     : 0px;
+
+                font-family : $font-primary-4;
+                font-size   : 1.4rem;
+                font-weight : 400;
+                color       : $gray-700;
+
+                pointer-events : none;
+                // transition : all will target the top, font-size and color properties
+                transition     : all 300ms ease;
+
+            }
+
+        } // end of name, email, password and confirm password input containers
+
+        // button container
+        .registerContainerFormButtonContainer {
+
+            display : grid;
+            margin  : 6.0rem 0 0 0;
+
+            > button {
+
+                @include button();
+
+                letter-spacing : 1px;
+
+                background : $blue-100;
+        
+                // had to do " outline : none; " in order to get rid of the weird outline or coloring
+                // around the button element after clicking the button
+                outline : none;
+        
+                &:hover {
+        
+                    background : rgba( 42, 119, 201, 1 );;
+        
+                }
+
+            } // end of button
+
+        } // end of button container
+
+    } // end of form
+
+    .registerContainerFormSignInContainer {
+
+        margin  : 2.5rem 0 0 0;
+
+        font-family    : $font-primary-4;
+        font-size      : 1.6rem;
+        font-weight    : 300;
+        color          : $gray-800;
+
+        > a:hover {
+
+            text-decoration : underline;
+
+        }
+
+    } // end of sign in container
+
+} // end of register container
+
+

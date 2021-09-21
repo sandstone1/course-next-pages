@@ -1,0 +1,129 @@
+
+// ==============================
+// PARTIAL IMPORTS
+// ==============================
+
+@import '../../styles/_color_variables.scss';
+@import '../../styles/_font_variables.scss';
+@import '../../styles/_responsive_breakpoints.scss';
+
+
+.eventDetailsPageContainer {
+
+    grid-column : 2 / 12;
+    margin      : 10.0rem 0 12.0rem 0;
+
+    @media ( max-width: $bp-480 ) {
+
+        margin : 8.0rem 0 12.0rem 0;
+
+    }
+
+    // ==============================
+    // div #1
+    // ==============================
+
+    .eventDetailsPageContainerDiv1 {
+
+        display               : grid;
+        grid-template-rows    : auto;
+        grid-template-columns : auto auto;
+        float                 : right; // this caused the border to surround the elements
+        // versus surrounding the entire container and the key to making this work was
+        // adding margin-top to the following div and this created the spacing needed
+        padding               : 2.0rem 1.0rem;
+
+        border : 1px solid rgba( 220, 220, 220, 1 );
+
+        @media ( max-width: $bp-920 ) {
+
+            display : none;
+    
+        }
+
+        > a:nth-child( 1 ) {
+
+            margin : 0 3.0rem 0 0;
+
+            color : $blue-400;
+
+        }
+
+        > a:nth-child( 2 ) {
+
+            color : $red-400;
+
+        }
+
+    } // end of eventDetailsPageContainerDiv1
+
+    // ==============================
+    // div #2
+    // ==============================
+
+    .eventDetailsPageContainerDiv2 {
+
+        margin : 10.0rem 0 0 0;
+
+        @media ( max-width: $bp-920 ) {
+
+            margin : 2.0rem 0 0 0;
+    
+        }
+
+        @media ( max-width: $bp-480 ) {
+
+            margin : 0 0 0 0;
+    
+        }
+
+        > img {
+
+            width : 100%;
+
+        }
+
+        p, span {
+
+            font-family : $font-primary-4;
+            font-size   : 1.8rem;
+            color       : $gray-800;
+
+        }
+
+        .eventDetailsPageContainerDiv2H1First {
+
+            display : inline-block;
+            margin  : 1.5rem 0 4.0rem 0;
+            padding : 1.2rem 2.4rem;
+
+            border-radius : 6px;
+
+            font-size : 3.2rem;
+            color     : $gray-200;
+
+            background-color : $blue-400;
+    
+        } // end of eventDetailsPageContainerDiv2H1First
+
+        .eventDetailsPageContainerDiv2H1Second {
+
+            margin : 3.0rem 0 1.5rem 0;
+
+            font-size : 2.4rem;
+    
+        } // end of eventDetailsPageContainerDiv2H1Second
+
+        .eventDetailsPageContainerDiv2H1Third,
+        .eventDetailsPageContainerDiv2H1Fourth {
+
+            margin : 2.0rem 0 1.5rem 0;
+
+            font-size : 2.4rem;
+    
+        } // end of eventDetailsPageContainerDiv2H1Third & Fourth
+
+    } // end of eventDetailsPageContainerDiv2
+
+} // end of eventDetailsPageContainer
+

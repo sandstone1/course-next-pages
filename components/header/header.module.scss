@@ -1,0 +1,25 @@
+
+
+// ==============================
+// PARTIAL IMPORTS
+// ==============================
+
+@import '../../styles/_color_variables.scss';
+
+
+.headerContainer {
+
+    display               : grid;
+    grid-template-columns : minmax( 6rem, 1fr )                        // col 1 - 2    ( column 1 )
+                            repeat( 10, minmax( min-content, 12rem ) ) // col 2 - 12   ( column 2 - 11 )
+                            minmax( 6rem, 1fr );                       // col 12 - 13  ( column 12 )
+    grid-area             : header;
+    align-items           : center;
+    justify-content       : center;
+    margin                : 0 0 0 0;
+
+    background : rgba( 61, 71, 98, 1 );
+
+} // end of header
+
+

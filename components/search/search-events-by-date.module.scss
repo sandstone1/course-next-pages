@@ -1,0 +1,223 @@
+
+
+// ==============================
+// PARTIAL IMPORTS
+// ==============================
+
+@import '../../styles/_color_variables.scss';
+@import '../../styles/_font_variables.scss';
+@import '../../styles/_mixins.scss';
+@import '../../styles/_responsive_breakpoints.scss';
+
+
+.searchEventsContainer {
+
+    margin                : 4.0rem 0 10.0rem 0;
+    padding               : 2.0rem 3.0rem;
+
+    border        : solid 1px rgba( 220, 220, 220, 1 );
+    border-radius : 6px;
+
+    transition : border-color 0.15s ease;
+
+    &:hover,
+    &:focus,
+    &:active {
+
+        border-color : rgba( 0, 112, 243, 1 );
+
+    }
+
+    > form {
+
+        display               : grid;
+        grid-template-rows    : min-content;
+        grid-template-columns : repeat( 3, max-content);
+        align-items           : center;
+        justify-content       : center;
+        grid-gap              : 0 6.0rem; // row column
+
+        @media all and ( max-width : $bp-1024 ) {
+            
+            grid-template-rows    : repeat( 3, min-content );
+            grid-template-columns : 1fr;
+            justify-items         : center;
+            grid-gap              : 3.0rem 0; // row column
+
+        }
+
+        // ==============================
+        // div #1
+        // ==============================
+
+        // first select element - year
+        .searchEventsContainerDiv1 {
+
+            > label {
+
+                margin : 0 2.0rem 0 0;
+
+                font-size   : 1.65rem;
+                font-weight : 700;
+
+            } // end of label
+
+            > select {
+
+                width       : 18.0rem;
+                padding     : 1.2rem 2.0rem;
+        
+                border        : 1px solid rgba( 230, 230, 230, 1 );
+                border-radius : 4px;
+        
+                font-family : $font-primary-4;
+                font-size   : 1.6rem;
+                font-weight : 400;
+                color       : $gray-800;
+        
+                // in order to get the select element to work in Sarafi / Firefox I had to add the following code
+                -webkit-appearance : none;
+                -moz-appearance    : none;
+                // for the fill color we had to put %23 before the hex color code in order to use the hex color code
+                background          : url( "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><polygon fill='%23808080' points='0,0 100,0 50,50'/></svg>" );
+                background-size     : 12px;
+                background-position : right 0.8rem top 68%;
+                background-repeat   : no-repeat;
+                background-color    : $gray-300;
+        
+                // from stackoverflow: "Each link has five different states: link, hover, active,
+                // focus and visited.
+        
+                // Link is the normal appearance, hover is when you mouse over, active is the
+                // state when it's clicked, focus follows active and visited is the state you end
+                // up when you unfocus the recently clicked link.
+        
+                // remove the blue outline that is around the select element after selecting a
+                // new value
+                &:focus {
+        
+                    outline : none;
+        
+                } // end of focus
+
+            } // end of select element - year
+
+        } // end of search events container div 1
+
+        // ==============================
+        // div #2
+        // ==============================
+
+        // second select element - month
+        .searchEventsContainerDiv2 {
+
+            margin : 0 2.0rem 0 0;
+
+            > label {
+
+                margin : 0 2.0rem 0 0;
+
+                font-size   : 1.65rem;
+                font-weight : 700;
+
+            } // end of label
+
+            > select {
+
+                width       : 18.0rem;
+                padding     : 1.2rem 2.0rem;
+        
+                border        : 1px solid rgba( 230, 230, 230, 1 );
+                border-radius : 4px;
+        
+                font-family : $font-primary-4;
+                font-size   : 1.6rem;
+                font-weight : 400;
+                color       : $gray-800;
+        
+                // in order to get the select element to work in Sarafi / Firefox I had to add the following code
+                -webkit-appearance : none;
+                -moz-appearance    : none;
+                // for the fill color we had to put %23 before the hex color code in order to use the hex color code
+                background          : url( "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><polygon fill='%23808080' points='0,0 100,0 50,50'/></svg>" );
+                background-size     : 12px;
+                background-position : right 0.8rem top 68%;
+                background-repeat   : no-repeat;
+                background-color    : $gray-300;
+        
+                // from stackoverflow: "Each link has five different states: link, hover, active,
+                // focus and visited.
+        
+                // Link is the normal appearance, hover is when you mouse over, active is the
+                // state when it's clicked, focus follows active and visited is the state you end
+                // up when you unfocus the recently clicked link.
+        
+                // remove the blue outline that is around the select element after selecting a
+                // new value
+                &:focus {
+        
+                    outline : none;
+        
+                } // end of focus
+
+            } // end of select element - month
+
+        } // end of search events container div 2
+
+
+        // ==============================
+        // div #3
+        // ==============================
+
+        // button
+        .searchEventsContainerDiv3 {
+
+            // display         : grid; // place the button at the end of the div and center it
+            // align-content   : center; // place the button at the end of the div and center it
+            // justify-self : end; // place the button at the end of the div and center it
+
+            @media ( max-width: 1024px ) {
+
+                justify-self : stretch; // make the button fill the width of the container
+        
+            }
+
+            > button {
+
+                @include button();
+                
+                display : block; // had to do display : block; in order for grid to work correctly
+                width   : 18.0rem;
+
+                border-radius : 5px;
+
+                font-family    : 'Poppins', sans-serif;
+                font-size      : 1.6rem;
+                letter-spacing : 1px;
+                text-transform : none;
+
+                background : $red-100;
+        
+                // had to do " outline : none; " in order to get rid of the weird outline or coloring
+                // around the button element after clicking the button
+                outline : none;
+        
+                &:hover {
+        
+                    background : $red-300;
+        
+                }
+
+                @media ( max-width: 1024px ) {
+
+                    width : 100%; // make the button fill the width of the container
+            
+                }
+        
+            } // end of search events container div 3 > a
+            
+        } // end of search events container div 3
+
+    } // end of form
+
+} // end of search events container

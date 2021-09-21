@@ -1,0 +1,240 @@
+
+
+// ==============================
+// PARTIAL IMPORTS
+// ==============================
+
+@import '../../styles/_color_variables.scss';
+@import '../../styles/_font_variables.scss';
+@import '../../styles/_mixins.scss';
+@import '../../styles/_responsive_breakpoints.scss';
+
+
+.eventItemContainer {
+
+    display               : grid;
+    grid-template-rows    : auto;
+    grid-template-columns : 5fr 1fr;
+    margin                : 0 0 6.0rem 0;
+    padding               : 3.0rem 1.5rem 3.0rem 1.5rem;
+
+    border        : 1px solid rgba( 234, 234, 234, 1 );
+    border-radius : 10px;
+    /*
+    // box shadow is from " https://css-tricks.com/almanac/properties/b/box-shadow/ "
+    box-shadow :
+        0 2.8px   2.2px  rgba( 0, 0, 0, 0.034 ),
+        0 6.7px   5.3px  rgba( 0, 0, 0, 0.048 ),
+        0 12.5px  10.0px rgba( 0, 0, 0, 0.060 ),
+        0 22.3px  17.9px rgba( 0, 0, 0, 0.072 ),
+        0 41.8px  33.4px rgba( 0, 0, 0, 0.086 ),
+        0 100.0px 80.0px rgba( 0, 0, 0, 0.120 )
+    ;
+    */
+
+    background : $white;
+
+    transition : color 0.15s ease, border-color 0.15s ease;
+
+    &:hover,
+    &:focus,
+    &:active {
+
+        border-color : rgba( 0, 112, 243, 1 );
+
+        color : rgba( 0, 112, 243, 1 );
+
+    }
+
+    @media ( max-width: 1280px ) {
+
+        grid-template-rows    : repeat( 2, min-content );
+        grid-template-columns : 1fr;
+        grid-gap              : 3.0rem 0;
+        margin                : 0 0 10.0rem 0; // visual preference
+        padding               : 4.0rem 4.0rem 4.0rem 4.0rem; // visual preference
+
+    }
+
+    @media ( max-width: 480px ) {
+
+        margin  : 0 0 8.0rem 0; // visual preference
+        padding : 3.5rem 3.5rem 3.5rem 3.5rem; // visual preference
+
+    }
+
+    @media ( max-width: 375px ) {
+
+        padding : 3.0rem 3.0rem 3.0rem 3.0rem; // visual preference
+
+    }
+
+    // ==============================
+    // div #1
+    // ==============================
+
+    .eventItemContainerDiv1 {
+
+        display               : inline-grid;
+        grid-template-rows    : auto;
+        grid-template-columns : repeat( 2, max-content );
+        align-items           : center;
+        grid-gap              : 0 4.0rem; // visual preference
+
+        @media ( max-width: 1280px ) {
+
+            grid-template-rows    : repeat( 2, min-content );
+            grid-template-columns : 1fr;
+            grid-gap              : 6.0rem 0; // visual preference
+    
+        }
+
+        @media ( max-width: 375px ) {
+
+            grid-gap : 5.0rem 0; // visual preference
+    
+        }
+
+        .eventItemContainerDiv1Column1 {
+
+            > img {
+
+                display : block; // had to do this in order to get rid of the extra space below the image
+                width   : 500px;
+                height  : auto;
+
+                @media ( max-width: 1280px ) {
+
+                    width  : 100%; // visual preference
+                    height : auto;
+            
+                }
+
+            } // end of img
+
+        } // end of eventItemContainerDiv1
+
+        .eventItemContainerDiv1Column2 {
+
+            font-family    : $font-primary-4;
+            font-size      : 1.6rem;
+            font-weight    : 400;
+            color          : $gray-800;
+
+            @media ( max-width: 1280px ) {
+
+                font-size: calc( 1.6rem * 1.15 ); // visual preference
+        
+            }
+
+            @media ( max-width: 1024px ) {
+
+                font-size: calc( 1.6rem * 1.1 ); // visual preference
+        
+            }
+
+            @media ( max-width: 768px ) {
+
+                font-size: calc( 1.6rem * 1.0 ); // visual preference
+        
+            }
+
+            > h2 {
+
+                margin : 0.3rem 0 0.5rem 0;
+
+            } // end of h2
+
+            > div {
+                
+                display               : grid;
+                grid-template-rows    : repeat( 2, min-content );
+                grid-template-columns : min-content max-content;
+                grid-template-areas   : "icon addressStreet"
+                                        "icon addressCity";
+                align-items           : center;
+                grid-gap              : 0 1.0rem;
+
+
+                .eventItemContainerDiv1Column2DivIcon {
+
+                    grid-area : icon;
+
+                }
+                
+                > address:nth-child( 2 ) {
+                    
+                    grid-area : addressStreet;
+
+                    font-style : normal;
+    
+                } // end of address nth-child( 2 )
+
+                > address:nth-child( 3 ) {
+                    
+                    grid-area : addressCity;
+
+                    font-style : normal;
+    
+                } // end of address nth-child( 3 )
+
+            } // end of eventItemContainerDiv1Column2 > div
+
+        } // end of eventItemContainerDiv1Column2
+
+    } // end of eventItemContainerDiv1
+
+    // ==============================
+    // div #2
+    // ==============================
+
+    .eventItemContainerDiv2 {
+
+        display         : grid; // place the button at the end of the div and center it
+        align-content   : center; // place the button at the end of the div and center it
+        justify-content : end; // place the button at the end of the div and center it
+
+        @media ( max-width: 1280px ) {
+
+            justify-content : stretch; // make the button fill the width of the container
+    
+        }
+
+        > a {
+
+            @include button();
+            
+            display : block; // had to do display : block; in order for grid to work correctly
+            width   : 12.0rem;
+
+            border-radius : 5px;
+
+            font-family    : 'Poppins', sans-serif;
+            font-size      : 1.6rem;
+            letter-spacing : 1px;
+            text-transform : none;
+
+            background : $red-100;
+    
+            // had to do " outline : none; " in order to get rid of the weird outline or coloring
+            // around the button element after clicking the button
+            outline : none;
+    
+            &:hover {
+    
+                background : $red-300;
+    
+            }
+
+            @media ( max-width: 1280px ) {
+
+                width : 100%; // make the button fill the width of the container
+        
+            }
+    
+        }
+        
+    } // end of eventItemContainerDiv2
+
+} // end of eventItemContainer
+

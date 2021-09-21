@@ -1,0 +1,125 @@
+
+
+// ==============================
+// PARTIAL IMPORTS
+// ==============================
+
+@import '../../styles/_color_variables.scss';
+@import '../../styles/_font_variables.scss';
+@import '../../styles/_responsive_breakpoints.scss';
+
+
+// remember we have the header css grid styling affecting the nav container flex styling
+.navContainer {
+
+    display         : flex;
+    justify-content : space-between;
+    align-items     : center;
+    grid-column     : 2 / 12;
+
+    @media all and ( max-width : $bp-1280 ) {
+
+        display               : grid;
+        grid-template-rows    : repeat( 2, max-content );
+        grid-template-columns : auto; // better than 1fr in this case
+        justify-content       : center; // keep centered at small screen sizes
+        justify-items         : center; // needed for situations when there is only one nav element
+        grid-column           : 1 / -1; // keep centered at small screen sizes
+
+    }
+
+    .navContainerLeft {
+
+        @media all and ( max-width : $bp-1280 ) {
+
+            margin : 1.5rem 0 1.0rem 0; // provide spacing between logo and nav elements on
+            // small screen sizes
+    
+        }
+
+        @media all and ( max-width : $bp-620 ) {
+
+            margin : 0;
+    
+        }
+
+        > h4 > a {
+
+            display: block;
+
+            padding : 1.0rem 2rem;
+
+            border        : 1px solid rgba( 150, 150, 150, 1 );
+            border-radius : 6px;
+
+            font-family    : $font-primary-4;
+            font-size      : 3.6rem;
+            color          : $white;
+            letter-spacing : 0.5px;
+            text-align     : center;
+
+            @media all and ( max-width : $bp-620 ) {
+
+                border : none;
+
+            }
+
+        } // end of h4 > a
+
+    } // end of nav container left
+
+    .navContainerRight {
+    
+        > ul {
+
+            display : flex; // flex worked just fine and the same way as css grid and better yet
+            // flex saved some lines of code versus css grid
+
+            > li > a {           
+                
+                display : block; // needed for animation
+                padding : 1.5rem 2.2rem;    
+
+                font-family    : $font-primary-4;
+                font-size      : 1.75rem;
+                color          : $white;
+                letter-spacing : 0.5px;
+
+                transition : all 0.2s ease-out;
+
+                @media all and ( max-width : $bp-375 ) {
+
+                    padding : 1.0rem 1.5rem;
+    
+                }
+
+            } // end of li > a
+
+            // hover and active selectors
+            > li > a:hover, > li > a:active {
+
+                border-radius : 6px;
+
+                background-color : rgba( 255, 255, 255, 0.05 );
+
+                // move the background color up just a little to add a nice hoover effect
+                transform: translate3d( 0, -3px, 0 );
+
+                // remove the animation effect for screen sizes under 1280 pixels
+                @media all and ( max-width : $bp-1280 ) {
+
+                    background-color : inherit;
+
+                    transform: none;
+            
+                }
+
+            } // end of li > > a:hover, > li > a:active
+
+        } // end of nav container right > ul
+
+    } // end of nav container right
+
+} // end of nav container
+
+

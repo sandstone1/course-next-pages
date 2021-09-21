@@ -1,0 +1,41 @@
+
+
+// ==============================
+// PARTIAL IMPORTS
+// ==============================
+
+@import '../styles/_color_variables.scss';
+@import '../styles/_font_variables.scss';
+
+
+.notFoundContainer {
+
+    display            : grid;
+    grid-column        : 2 / 12;
+    grid-template-rows : auto;
+    align-content      : start;
+    justify-content    : center;
+    margin             : 9.0rem 0 9.0rem 0;
+
+    text-align : center;
+
+    > h1 > svg {
+
+        vertical-align : -4px; // make the icon and h1 element line up vertically
+
+    } // end of h1 > svg
+
+    > h4 {
+
+        padding : 0.5rem 0 1.0rem 0;
+
+    } // end of h4
+
+    > p > a {
+
+        color           : rgba( 73, 121, 255, 1 );
+        text-decoration : underline;
+
+    } // end of p > a
+
+} // end of not found container

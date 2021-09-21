@@ -1,0 +1,139 @@
+
+
+// ==============================
+// PARTIAL IMPORTS
+// ==============================
+
+@import '../styles/_color_variables.scss';
+@import '../styles/_font_variables.scss';
+@import '../styles/_responsive_breakpoints.scss';
+
+
+.homePageContainer {
+
+    display             : grid;
+    grid-template-rows  : 220px min-content;  // doing pixels instead of rem keeps the
+    // row hieght at 1000px as the screen becomes smaller
+    grid-template-columns : minmax( 6rem, 1fr )                        // col 1 - 2    ( column 1 )
+                            repeat( 10, minmax( min-content, 12rem ) ) // col 2 - 12   ( column 2 - 11 )
+                            minmax( 6rem, 1fr );                       // col 12 - 13  ( column 12 )
+    grid-template-areas : "div1"
+                          "div2";
+    grid-column         : 1 / -1; // do this so that the child elements take up the entire
+    // screen horizontally
+
+    @media all and ( max-width : $bp-1280 ) {
+
+        grid-template-rows  : 160px min-content; // visual preference and this is tied to #2 and #3
+        // this is #1
+
+    }
+
+    @media all and ( max-width : $bp-768 ) {
+
+        grid-template-rows  : 150px min-content; // visual preference and this is tied to #2 and #3
+        // this is #1
+
+    }
+
+    @media all and ( max-width : $bp-480 ) {
+
+        grid-template-rows  : 160px min-content; // visual preference and this is tied to #2 and #3
+        // this is #1
+
+    }
+
+    // ==============================
+    // div #1
+    // ==============================
+
+    .homePageContainerImageContainer {
+    
+    grid-area : div1;    
+    height    : 1400px; // visual preference and this is hard coded and tied to main height
+    // on the index.js page
+    // this is #2
+
+    @media all and ( max-width : $bp-1280 ) {
+
+        height : 2450px; // visual preference and this is #2
+
+    }
+
+    @media all and ( max-width : $bp-920 ) {
+
+        height : 2350px; // visual preference and this is #2
+
+    }
+
+    @media all and ( max-width : $bp-768 ) {
+
+        height : 2100px; // visual preference and this is #2
+
+    }
+
+    @media all and ( max-width : $bp-620 ) {
+
+        height : 1900px; // visual preference and this is #2
+
+    }
+
+    @media all and ( max-width : $bp-480 ) {
+
+        height : 1600px; // visual preference and this is #2
+
+    }
+
+    // ==============================
+    // Image hero element ( full page ) that lays on top of the header element and the main element
+    // ==============================
+
+    // ****
+    // remember we are using styled jsx in the index.js file to lay the header nav elements
+    // on top of the hero image element
+    // ****
+
+    position : absolute;
+    left     : 0;
+    top      : 0;
+    right    : 0;
+    bottom   : 0;
+
+    background-image      : linear-gradient( to bottom, rgba( 61, 71, 98, 0.9 ),  rgba( 81, 91, 118, 0.9 ) ), url( ../public/images/networking_hero_01.jpg );
+    background-position   : center; 
+    background-size       : cover;
+    background-blend-mode : multiply;
+
+    background-color : $blue-100;
+
+        .homePageContainerImageContainerH2 {
+
+            margin  : 26.0rem 0 8.0rem 0;
+            padding : 0 0 0 0;
+
+            font-family    : $font-primary-4;
+            font-size      : 3.2rem;
+            font-weight    : 700;
+            color          : $gray-225;
+            letter-spacing : 1px;
+            text-align     : center;
+
+        } // end of title
+
+    } // end of homePageContainerImageContainer
+
+    // ==============================
+    // div #2
+    // ==============================
+
+    .homePageContainerContentContainer1 {
+
+        grid-area             : div2;
+        grid-row              : 2 / 3;
+        grid-column           : 2 / 12;
+        z-index               : 1;
+
+    } // end of homePageContainerContentContainer1
+
+} // end of homePageContainer
+

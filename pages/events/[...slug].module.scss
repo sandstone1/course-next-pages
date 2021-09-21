@@ -1,0 +1,35 @@
+
+
+// ==============================
+// PARTIAL IMPORTS
+// ==============================
+
+@import '../../styles/_color_variables.scss';
+@import '../../styles/_font_variables.scss';
+@import '../../styles/_responsive_breakpoints.scss';
+
+
+.filteredEventsPageContainer {
+
+    display     : grid;
+    grid-column : 2 / 12;
+    margin      : 12.0rem 0 12.0rem 0;
+
+    > h1 {
+        
+        display : inline-block; // make the background take up the width of the button and
+        // not the container
+        margin  : 0 auto 10.0rem auto;
+        padding : 1.2rem 4.8rem;
+
+        border-radius : 6px;
+
+        font-family    : $font-primary-4;
+        font-size      : 3.2rem;
+        color          : $gray-200;
+
+        background-color : $blue-400;
+
+    } // end of title
+
+} // end of filtered events page container
