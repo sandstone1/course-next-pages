@@ -1,0 +1,37 @@
+
+
+// ==============================
+// PARTIAL IMPORTS
+// ==============================
+
+
+.commentListContainer {
+
+    display  : grid;
+    grid-gap : 4rem 0;
+
+    > li {
+
+        display : grid;
+        padding : 1rem 0;
+
+        border-bottom : 2px solid rgba( 220, 220, 220, 1 );
+
+        > span {
+
+            font-style : italic;
+            text-align : right;
+            
+            > address {
+
+                display : inline;
+
+            } // end of address
+
+        } // end of span
+
+    } // end of li
+
+} // end of commentListContainer
+
+

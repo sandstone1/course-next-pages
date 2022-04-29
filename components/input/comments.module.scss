@@ -1,0 +1,47 @@
+
+// ==============================
+// PARTIAL IMPORTS
+// ==============================
+
+@import '../../styles/_color_variables.scss';
+@import '../../styles/_font_variables.scss';
+@import '../../styles/_mixins.scss';
+
+
+.commentsContainer {
+
+    margin  : 8.0rem 0 8.0rem 0;
+
+    // button container
+    .commentsContainerButtonContainer {
+
+        //display         : grid;
+        //justify-content : center;
+        margin          : 4.0rem 0 6.0rem 0;
+
+        > button {
+
+            @include button();
+
+            border-radius : 4px;
+
+            letter-spacing : 1px;
+
+            background : sienna;
+    
+            // had to do " outline : none; " in order to get rid of the weird outline or coloring
+            // around the button element after clicking the button
+            outline : none;
+    
+            &:hover {
+    
+                background : $sienna-dark;
+    
+            }
+
+        } // end of button
+
+    } // end of button container
+
+} // end of commentsContainer
+

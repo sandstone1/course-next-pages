@@ -1,0 +1,86 @@
+
+
+// ==============================
+// PARTIAL IMPORTS
+// ==============================
+
+@import '../../styles/_color_variables.scss';
+@import '../../styles/_font_variables.scss';
+@import '../../styles/_mixins.scss';
+@import '../../styles/_responsive_breakpoints.scss';
+
+
+.searchBoxContainer {
+
+    @media all and ( max-width : $bp-1280 ) {
+
+        display : none;
+
+    }
+
+    > form {
+
+        display               : grid;
+        grid-template-columns : repeat( 2, max-content );
+        align-items           : center;
+
+        > input {
+
+            padding : 0.95rem 2.0rem 0.95rem 1.6rem;
+
+            border : none;
+
+            font-family    : $font-primary-4;
+            font-size      : 1.5rem;
+            color          : $gray-800;
+
+            opacity : 0.7;
+
+            &:focus {
+
+                outline : none;
+
+                opacity : 1.0;
+
+            }
+
+            // remove placeholder on focus and then replace placeholder on blur
+            &:focus::placeholder {
+
+                color : transparent;
+
+            }
+
+        } // end of form
+
+        .searchBoxContainerFormButtonContainer {
+            
+            margin  : 0 0 0 0;
+
+            > button {
+
+                @include button();
+
+                display: block;
+
+                padding : 1.1rem 2.0rem;
+
+                border        : none; // get rid of the default border
+                border-radius : 0; // get rid of the default radius
+
+                background : $gray-800;
+
+                &:hover {
+
+                    background : $gray-900;
+
+                }             
+
+            } // end of button
+        
+        } // end of searchBoxContainerFormButtonContainer
+
+    } // end of form
+
+} // searchBoxContainer
+

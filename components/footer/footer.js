@@ -12,7 +12,7 @@ const Footer = () => {
 
         <footer className={ styles.footerContainer }>
 
-            <h2>Copyright &copy; 2021 Next</h2>
+            <h2>Copyright &copy; 2022 Next</h2>
 
             <div>
 

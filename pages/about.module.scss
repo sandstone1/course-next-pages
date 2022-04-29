@@ -41,6 +41,25 @@
 
         //color : $blue-600;
 
+        > ul > span {
+
+            display : inline-block;
+            margin  : 2.0rem 0 0 0;
+            padding : 0 0 2px 0;
+
+            border-bottom : 1px solid $gray-900;
+
+            font-family : $font-primary-4;
+            font-size   : 1.6rem;
+            font-weight : 600;
+            color       : $blue-500;
+            // text-transform: uppercase;
+            // letter-spacing: 1px;
+
+            // background-color: $blue-100;
+
+        }
+
         > ul > li {
 
             margin : 2.0rem 0 0 0;
@@ -60,7 +79,14 @@
 
         } // end of ul > li:before
 
-        > ul:nth-child( 2 ) {
+        > ul:nth-child( 2 ),
+        > ul:nth-child( 3 ),
+        > ul:nth-child( 4 ),
+        > ul:nth-child( 5 ),
+        > ul:nth-child( 6 ),
+        > ul:nth-child( 7 ),
+        > ul:nth-child( 8 ),
+        > ul:nth-child( 9 ) {
 
             margin  : 3.0rem 0 0 0;
             padding : 1.0rem 0 0 0;

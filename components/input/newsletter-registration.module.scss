@@ -1,0 +1,160 @@
+
+
+// ==============================
+// PARTIAL IMPORTS
+// ==============================
+
+@import '../../styles/_color_variables.scss';
+@import '../../styles/_font_variables.scss';
+@import '../../styles/_mixins.scss';
+
+
+.newsletterRegistrationContainer {
+
+    display  : grid;
+    grid-gap : 3.0rem 0;
+    margin   : 12.0rem 0 12.0rem 0;
+    padding  : 6.0rem 4.0rem;
+
+    border        : 1px solid rgba( 80, 80, 80, 1 );
+    border-radius : 6px;
+
+    // h2
+    .newsletterRegistrationContainerH2 {
+
+        margin  : 0 0  0;
+        padding : 0 0 0 0;
+
+        font-family    : $font-primary-4;
+        font-size      : 3.2rem;
+        font-weight    : 700;
+        color          : $gray-225;
+        letter-spacing : 1px;
+        text-align     : center;
+
+    } // end of h2
+
+    // form
+    .newsletterRegistrationContainerForm {
+
+        display               : grid;
+        grid-template-columns : 3fr 1fr;
+        width                 : 440px;
+        margin                : 0 auto;
+
+        // email container
+        .newsletterRegistrationContainerFormEmailInputContainer {
+
+            position : relative;
+            height   : 62px;
+            margin   : 0 0 0 0;
+
+            // input element
+            > input {
+
+                display : block;
+                width   : 100%;
+                height  : 100%;
+                margin  : 0;
+                padding : 12px 12px 12px 12px;
+
+                border        : none;
+                border-radius : 6px 0 0 6px;
+                border-bottom : 1px solid $gray-650;
+
+                font-family : $font-primary-4;
+                font-size   : 1.75rem;
+                font-weight : 400;
+                color       : $gray-900;
+
+                background-color : rgb( 255, 255, 255);
+
+                transition : all 0.2s ease-out;
+
+                &:focus {
+
+                    outline : none;
+
+                }
+
+                // The general sibling combinator (~) separates two selectors and matches the
+                // second element only if it follows the first element (though not necessarily
+                // immediately), and both are children of the same parent
+
+                // what this says below is that whenever the user focuses inside the input element
+                // we want to use the general sibling combinator to target the form input label
+                // element and give the label an opacity of 0 and use a transition is give the
+                // movement a nice feel
+                &:focus ~ .newsletterRegistrationContainerFormEmailInputContainerLabel {
+
+                    opacity : 0;
+
+                }
+
+            } // end of the input element
+
+            // email label
+            .newsletterRegistrationContainerFormEmailInputContainerLabel {
+
+                position : absolute;
+                top      : 17px; // 62px height - 28px letter height / 2 = 17px
+                left     : 12px;
+
+                font-family : $font-primary-4;
+                font-size   : 1.75rem;
+                font-weight : 400;
+                color       : $gray-900;
+
+                pointer-events : none;
+                transition     : opacity 200ms ease;
+
+            } // end of the input label and text area label
+
+            // email label shrink
+            .newsletterRegistrationContainerFormEmailInputContainerLabelShrink {
+
+                opacity : 0;
+            
+            } // end of input label shrink
+
+        } // end of email input container
+
+        // button container
+        .newsletterRegistrationContainerFormButtonContainer {
+
+            display : grid;
+            margin  : 0 0 0 0;
+
+            > button {
+
+                @include button();
+
+                border-radius : 0 6px 6px 0;
+
+                font-family    : $font-primary-4;
+                font-size      : 1.75rem;
+                color          : $white;
+                letter-spacing : 0.5px;
+                text-transform : none;
+
+                // background : $blue-500;
+                background : rgba( 255, 255, 255, 0.15 );
+        
+                // had to do " outline : none; " in order to get rid of the weird outline or coloring
+                // around the button element after clicking the button
+                outline : none;
+        
+                &:hover {
+        
+                    background : $blue-300;
+
+                }
+
+            } // end of button
+
+        } // end of button container
+
+    } // end of form
+
+} // end of newsletterRegistrationContainer
+

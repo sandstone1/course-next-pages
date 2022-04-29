@@ -69,14 +69,15 @@
     } // end of nav container left
 
     .navContainerRight {
-    
+
         > ul {
 
-            display : flex; // flex worked just fine and the same way as css grid and better yet
-            // flex saved some lines of code versus css grid
+            display               : grid;
+            grid-template-columns : repeat( 3, auto );
+            align-items           : center;
 
-            > li > a {           
-                
+            > li > a {
+
                 display : block; // needed for animation
                 padding : 1.5rem 2.2rem;    
 

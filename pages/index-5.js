@@ -3,7 +3,7 @@
 // remember the url path for this file is " http://localhost:3016 "
 
 // import in the scss file
-import styles from './index-hero_1.module.scss';
+import styles from './index-hero-5.module.scss';
 
 
 export default function HomePage() {

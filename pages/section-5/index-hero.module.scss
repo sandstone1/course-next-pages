@@ -4,9 +4,9 @@
 // PARTIAL IMPORTS
 // ==============================
 
-@import '../styles/_color_variables.scss';
-@import '../styles/_font_variables.scss';
-@import '../styles/_responsive_breakpoints.scss';
+@import '../../styles/_color_variables.scss';
+@import '../../styles/_font_variables.scss';
+@import '../../styles/_responsive_breakpoints.scss';
 
 
 .homePageContainer {
@@ -99,7 +99,7 @@
     right    : 0;
     bottom   : 0;
 
-    background-image      : linear-gradient( to bottom, rgba( 61, 71, 98, 0.9 ),  rgba( 81, 91, 118, 0.9 ) ), url( ../public/images/networking_hero_01.jpg );
+    background-image      : linear-gradient( to bottom, rgba( 61, 71, 98, 0.9 ),  rgba( 81, 91, 118, 0.9 ) ), url( ../../public/images/networking_hero_01.jpg );
     background-position   : center; 
     background-size       : cover;
     background-blend-mode : multiply;
@@ -128,10 +128,24 @@
 
     .homePageContainerContentContainer1 {
 
-        grid-area             : div2;
-        grid-row              : 2 / 3;
-        grid-column           : 2 / 12;
-        z-index               : 1;
+        grid-area   : div2;
+        grid-row    : 2 / 3;
+        grid-column : 2 / 12;
+        z-index     : 1;
+        margin      : 2.0rem 0 0 0;
+
+        > ul > li > a {
+
+            display : block; // needed in order to center the content and add margin to the content
+            margin  : 0 0 2.0rem 0;
+
+            font-family : $font-primary-4;
+            font-size   : 1.8rem;
+            font-weight : 400;
+            color       : $white;
+            text-align  : center;
+
+        }
 
     } // end of homePageContainerContentContainer1
 

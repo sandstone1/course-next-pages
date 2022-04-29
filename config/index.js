@@ -1,6 +1,6 @@
 
 
-// when we disploy we will create an environment variable called " NEXT_PUBLIC_API_URL "
+// when we deploy we will create an environment variable called " NEXT_PUBLIC_API_URL "
 // and the reason we add NEXT_PUBLIC is because we want this environment variable to
 // be visible within the client / browser
 
@@ -22,6 +22,7 @@
 // let's create an environment variable called " dev "
 const dev = process.env.NODE_ENV !== 'production';
 
-// if we're in development mode use " localhost:3014 "
+// if we're in development mode use " localhost:3016 "
 export const API_URL = dev ? 'http://localhost:3016' : 'https://course-next-auth.vercel.app';
+
 

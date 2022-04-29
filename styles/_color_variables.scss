@@ -46,6 +46,7 @@ $maroon-200        : rgba( 108, 0, 0, 1 );
 $brown-100         : rgba( 160, 82, 45, 1 );
 $brown-200         : rgba( 165, 42, 42, 1 );
 $brown-300         : rgba( 139, 69, 19, 1 );
+$sienna-dark       : rgba( 140, 62, 35, 1 );
 $orange            : rgba( 253, 126, 20, 1 );
 $yellow-100        : rgba( 255, 255, 0, 1 );
 $yellow-200        : rgba( 248, 232, 37, 1 );
@@ -74,7 +75,10 @@ $gray-675          : rgba( 105, 105, 105, 1 );
 $gray-725          : rgba( 109, 93, 75, 1 );
 $gray-735          : rgba( 84, 72, 58, 1 );
 $gray-750          : rgba( 74, 80, 90, 1 );
+$gray-835          : rgba( 64, 52, 38, 1 );
 $gray-850          : rgba( 54, 60, 70, 1 );
+$gray-865          : rgba( 40, 50, 60, 1 );
+$gray-880          : rgba( 40, 40, 40, 1 );
 
 $gray-gradient-right        : linear-gradient( 120deg, rgba( 233, 235, 237, 1 ) 0%, rgba( 249, 247, 247, 1 ) 100% );
 $gray-gradient-right-hover  : linear-gradient( 120deg, rgba( 228, 230, 232, 1 ) 0%, rgba( 244, 242, 242, 1 ) 100% );

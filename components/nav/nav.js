@@ -822,6 +822,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 // import in the useSession(); hook and the signOut function
 import { useSession, signOut } from 'next-auth/react';
+// import in the SearchBox component
+import SearchBoxComponent from '../search-box/search-box-v2';
 // import in Simple Icons
 import { SiNextDotJs } from 'react-icons/si';
 // import in BoxIcons
@@ -832,7 +834,6 @@ import { FaUser } from 'react-icons/fa';
 import { VscSignOut } from 'react-icons/vsc';
 // import in Font Awesome
 import { FaMicrophone } from 'react-icons/fa';
-
 // import in our stylesheet
 import styles from './nav.module.scss';
 
@@ -841,6 +842,10 @@ const Nav = () => {
 
     // ==============================
     // component state
+    // ==============================
+
+    // ==============================
+    // destructure props
     // ==============================
 
     // ==============================
@@ -991,6 +996,25 @@ const Nav = () => {
 
     } // end of handleUserName
 
+    // ==============================
+    // handleSearch function
+    // ==============================
+
+    const handleSearch = async ( searchTerm ) => {
+
+        // since handleSearch is not part of a form submission there is no need to call
+        // e.preventDefault();
+
+        // build the endpoint
+        const fullPath = `/search/${ searchTerm }`;
+
+        // use router.push(); to go to the fullPath endpoint, which will be the
+        // [ searchTerm ].js page
+        router.push( fullPath );
+
+    } // end of handleSearch
+
+
     return (
 
         <nav className={ styles.navContainer }>
@@ -1052,8 +1076,10 @@ const Nav = () => {
                         )
                     }
 
+                    <SearchBoxComponent onSearch={ handleSearch } />
+
                     { /* show profile tab only if were authenticated and logged in */ }
-                    { 
+                    {
                         ( status === "authenticated" ) && (
                             <li>
                                 <Link href="/profile">

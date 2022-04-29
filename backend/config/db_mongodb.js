@@ -97,7 +97,7 @@ export async function connectToDatabase() {
 
 
 
-// at the beginning of tutorial 231, given all the notes, I created a new file below without
+// at the beginning of tutorial 152, given all the notes, I created a new file below without
 // the notes so we are starting fresh
 
 // import in MongoClient
@@ -105,41 +105,40 @@ import { MongoClient } from 'mongodb';
 // import in colors
 import colors from 'colors';
 
+// define the MongoDB connection string
+// refer to the next.config.js file for details on each key value pair below and by
+// making this change we can delete the .env file
+const connectionString = `mongodb+srv://${ process.env.mongodb_username }:${ process.env.mongodb_password }@${ process.env.mongodb_clustername }.ygd2v.mongodb.net/${ process.env.mongodb_database }?retryWrites=true&w=majority`;
+
 
 // create our function
 export async function connectToDatabase() {
 
-    try {
+    // the MongoClient will help us establish a connection to the database and use
+    // MongoClient to call the connect method and inside the connect method we will pass in
+    // our database string from MongoDB and then pass in a configuration object and then
+    // save the result to the const " client "
+    const client = await MongoClient.connect( 
 
-        // the MongoClient will help us establish a connection to the database and use
-        // MongoClient to call the connect method and inside the connect method we will pass in
-        // our database string from MongoDB and then pass in a configuration object and then
-        // save the result to the const " client "
-        const client = await MongoClient.connect( process.env.MONGO_URI, {
+        connectionString,
+
+        // config object
+        {
 
             // I was getting an error message that said " To use the new Server Discover and
             // Monitoring engine, pass option { useUnifiedTopology : true } to the MongoClient
             // constructor. "
             useUnifiedTopology : true
 
-        } );
+        }
 
-        // log out a message in the console and use the colors.js package at the end
-        console.log( 'MongoDB is connected'.cyan.underline );
+    );
 
-        // then return " client " so that when we call connectToDatabase() we get the client
-        return client;
+    // log out a message in the console and use the colors.js package at the end
+    console.log( 'MongoDB is connected'.cyan.underline );
 
-    } catch ( error ) {
-
-        // if we can not connect to the database then log out an error message and use
-        // the colors.js package at the end
-        console.error( `Error: ${ error.message }`.red.underline.bold );
-
-        // exit with an uncaught fatal exception
-        process.exit( 1 );
-
-    } // end of try catch
+    // then return " client " so that when we call connectToDatabase() we get the client
+    return client;
 
 } // end of connectToDatabase()
 

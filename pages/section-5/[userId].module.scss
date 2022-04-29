@@ -1,0 +1,38 @@
+
+
+// ==============================
+// PARTIAL IMPORTS
+// ==============================
+
+@import '../../styles/_color_variables.scss';
+@import '../../styles/_font_variables.scss';
+@import '../../styles/_responsive_breakpoints.scss';
+
+
+.userDetailsPageContainer {
+
+    grid-column : 1 / -1; // do this so that the child elements take up the entire
+    // screen horizontally
+    margin      : 12.0rem 0 2.0rem 0;
+
+    // ==============================
+    // div #1
+    // ==============================
+
+    .userDetailsPageContainerDiv1 {
+
+        > h3 {
+
+            margin : 0 0 2.0rem 0;
+
+            font-family : $font-primary-4;
+            font-size   : 2.4rem;
+            font-weight : 700;
+            color       : $gray-800;
+            text-align  : center;
+
+        } // end of h3
+
+    } // end of userDetailsPageContainerDiv1
+
+} // end of userDetailsPageContainer

@@ -1,0 +1,3 @@
+
+
+export const SEARCH_TERM_RESET   = 'SEARCH_TERM_RESET'

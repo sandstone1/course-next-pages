@@ -17,14 +17,14 @@ import styles from './event-item.module.scss';
 export default function EventItem( { event } ) {
 
     // ==============================
+    // component state
+    // ==============================
+
+    // ==============================
     // destructure props
     // ==============================
 
     const { id, image, date, title, location } = event;
-
-    // ==============================
-    // component state
-    // ==============================
 
     // ==============================
     // useRef();

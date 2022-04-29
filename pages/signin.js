@@ -1771,7 +1771,7 @@ const SignInPage = () => {
                     <ErrorMessage                    
                         setFrontendErrorMessage={ setFrontendErrorMessage }
                     >
-                        { frontendErrorMessage }                    
+                        { frontendErrorMessage }
                     </ErrorMessage>
 
                 ) : ( 

@@ -1,0 +1,183 @@
+
+
+// ==============================
+// PARTIAL IMPORTS
+// ==============================
+
+@import '../../styles/_color_variables.scss';
+@import '../../styles/_font_variables.scss';
+@import '../../styles/_mixins.scss';
+
+
+.newCommentContainer {
+
+    margin  : 4.0rem 0 8.0rem 0;
+
+    // form
+    .newCommentContainerForm {
+
+        width  : 380px;
+        margin : 0 auto;
+
+        // email container, name container and text area box container
+        .newCommentContainerFormEmailInputContainer,
+        .newCommentContainerFormNameInputContainer,
+        .newCommentContainerFormFeedbackTextAreaContainer {
+
+            position : relative;
+            margin   : 0 0 4.0rem 0;
+
+            // input element
+            > input {
+
+                display : block;
+                width   : 100%;
+                margin  : 0;
+                padding : 12px 12px 12px 0;
+
+                border        : none;
+                border-radius : 4px;
+                border-bottom : 1px solid $gray-650;
+
+                font-family : $font-primary-4;
+                font-size   : 1.6rem;
+                font-weight : 400;
+                color       : $gray-900;
+
+                background-color : rgb( 255, 255, 255);
+
+                &:focus {
+
+                    outline : none;
+
+                }
+
+                // The general sibling combinator (~) separates two selectors and matches the
+                // second element only if it follows the first element (though not necessarily
+                // immediately), and both are children of the same parent
+
+                // what this says below is that whenever the user focuses inside the input element
+                // we want to use the general sibling combinator to target the form input label
+                // element and give the label an opacity of 0 and use a transition is give the
+                // movement a nice feel
+                &:focus ~ .newCommentContainerFormEmailInputContainerLabel,
+                &:focus ~ .newCommentContainerFormNameInputContainerLabel {
+
+                    opacity : 0;
+
+                }
+
+            } // end of the input element
+
+            // text area box
+            > textarea {
+
+                display : block;
+                width   : 100%;
+                margin  : 5.7rem 0 0 0;
+                padding : 12px 12px 12px 12px;
+
+                // border        : none;
+                border-radius : 4px;
+                border-bottom : 1px solid $gray-650;
+
+                font-family : $font-primary-4;
+                font-size   : 1.6rem;
+                font-weight : 400;
+                color       : $gray-900;
+
+                background-color : rgb( 255, 255, 255);
+
+                &:focus {
+
+                    outline : none;
+
+                }
+
+                // The general sibling combinator (~) separates two selectors and matches the
+                // second element only if it follows the first element (though not necessarily
+                // immediately), and both are children of the same parent
+
+                // what this says below is that whenever the user focuses inside the input element
+                // we want to use the general sibling combinator to target the form input label
+                // element and give the label an opacity of 0 and use a transition is give the
+                // movement a nice feel
+                &:focus ~ .newCommentContainerFormFeedbackTextAreaContainerLabel {
+
+                    opacity : 0;
+
+                }
+
+            } // end of text area box
+
+            // email and name input labels and text area label
+            .newCommentContainerFormEmailInputContainerLabel,
+            .newCommentContainerFormNameInputContainerLabel,
+            .newCommentContainerFormFeedbackTextAreaContainerLabel {
+
+                position : absolute;
+                top      : 12px;
+                left     : 0;
+
+                font-family : $font-primary-4;
+                font-size   : 1.6rem;
+                font-weight : 400;
+                color       : $gray-900;
+
+                pointer-events : none;
+                transition     : opacity 200ms ease;
+
+            } // end of the input label and text area label
+
+            // change left margin for the text area label only
+            .newCommentContainerFormFeedbackTextAreaContainerLabel {
+
+                left : 12px;
+
+            } // end of text area label
+
+            // email and name input label shrink and text area label shrink
+            .newCommentContainerFormEmailInputContainerLabelShrink,
+            .newCommentContainerFormNameInputContainerLabelShrink,
+            .newCommentContainerFormFeedbackTextAreaContainerLabelShrink {
+
+                display: none;
+            
+            } // end of input label shrink and text area label shrink
+
+        } // end of email input container and feedback text area container
+
+        // button container
+        .newCommentContainerFormButtonContainer {
+
+            display : grid;
+            margin  : 4.0rem 0 0 0;
+
+            > button {
+
+                @include button();
+
+                border-radius : 4px;
+
+                letter-spacing : 1px;
+
+                background : sienna;
+        
+                // had to do " outline : none; " in order to get rid of the weird outline or coloring
+                // around the button element after clicking the button
+                outline : none;
+        
+                &:hover {
+        
+                    background : $sienna-dark;
+        
+                }
+
+            } // end of button
+
+        } // end of button container
+
+    } // end of form
+
+} // end of newCommentContainer
+

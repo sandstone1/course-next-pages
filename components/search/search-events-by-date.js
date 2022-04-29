@@ -17,16 +17,16 @@ import styles from './search-events-by-date.module.scss';
 export default function SearchEventsByDateComponent( { onSearch } ) {
 
     // ==============================
+    // component state
+    // ==============================
+
+    // ==============================
     // destructure props
     // ==============================
 
     // set component level state
     const [ month, setMonth ] = useState( '1' );
     const [ year, setYear ]   = useState( '2021' );
-
-    // ==============================
-    // component state
-    // ==============================
 
     // ==============================
     // useRef();

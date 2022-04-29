@@ -410,7 +410,7 @@ export async function getServerSideProps( context ) {
     // we can use the getSession hook on the server side as well as the client side and we
     // can pass in a configuration object or {} and then get access to the user request by
     // doing " context.req "
-    
+
     // ==============================
     // getSession();
     // ==============================

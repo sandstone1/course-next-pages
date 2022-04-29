@@ -1,0 +1,204 @@
+
+
+// ==============================
+// PARTIAL IMPORTS
+// ==============================
+
+@import '../../styles/_color_variables.scss';
+@import '../../styles/_font_variables.scss';
+@import '../../styles/_mixins.scss';
+@import '../../styles/_responsive_breakpoints.scss';
+
+
+.searchBoxContainer {
+
+    position : relative;
+
+    @media all and ( max-width : $bp-1280 ) {
+
+        display : none;
+
+    }
+
+    > form {
+
+        display               : grid;
+        grid-template-columns : repeat( 2, max-content );
+        align-items           : center;
+
+        .searchBoxContainerFormInputContainer {
+
+            display               : grid; // state when input field opens
+            grid-template-columns : 6.0rem 30.0rem; // state when input field opens
+            align-items           : center; // state when input field opens
+            width                 : 0rem; // starting state
+
+            opacity     : 0; // starting state and see the handleOnClick function for ending state
+            // transform  : scaleY( 0 ); // starting state and see the handleOnClick function for
+            // ending state
+            transform   : scaleX( 0 ); // starting state and see the handleOnClick function for
+            // ending state
+            transition  : all 0.3s ease-out; // starting state and see the handleOnClick function
+            // for ending state
+            will-change : transform, opacity;
+
+            .searchBoxContainerFormButtonContainer1 {
+
+                margin  : 0 0 0 0;
+
+                > button {
+
+                    @include button();
+
+                    display : block;
+
+                    padding : 0.8rem 2.2rem; // make sure padding lines up with the input box
+
+                    border        : none; // get rid of the default border
+                    border-radius : 6px 0 0 6px; // get rid of the default radius
+
+                    font-family    : $font-primary-4;
+                    font-size      : 1.75rem;
+                    color          : $white;
+                    letter-spacing : 0.5px;
+                    text-transform : none;
+
+                    background : rgba( 255, 255, 255, 0.15 );
+
+                    transition : all 0.2s ease-out;
+
+                    @media all and ( max-width : $bp-375 ) {
+
+                        padding : 1.0rem 1.5rem;
+        
+                    }
+
+                    // hover and active selectors
+                    &:hover, &:active {
+
+                        // border-radius : 6px;
+
+                        background-color : $gray-735;
+
+                        // background-color : rgba( 255, 255, 255, 0.05 );
+
+                        // move the background color up just a little to add a nice hoover effect
+                        // transform: translate3d( 0, -3px, 0 );
+
+                        // remove the animation effect for screen sizes under 1280 pixels
+                        @media all and ( max-width : $bp-1280 ) {
+
+                            // background-color : inherit;
+
+                            // transform: none;
+                    
+                        }
+
+                    } // end of li > > a:hover, > li > a:active
+
+
+                } // end of button
+            
+            } // end of searchBoxContainerFormButtonContainer1
+
+            > input {
+
+                width   : 30.0rem; // needed to set the width for this element
+                padding : 0.85rem 2.0rem 0.85rem 1.6rem;
+
+                border : none;
+                border-radius : 0 6px 6px 0;
+
+                font-family    : $font-primary-4;
+                font-size      : 1.6rem;
+                color          : $black;
+
+                background : rgba( 230, 230, 230, 1 );
+
+                &:focus {
+
+                    outline : none;
+
+                    opacity : 1.0;
+
+                }
+
+                &::placeholder {
+
+                    color : $gray-700;
+
+                }
+
+                /*
+                // remove placeholder on focus and then replace placeholder on blur
+                &:focus::placeholder {
+
+                    color : transparent;
+
+                }
+                */
+
+            } // end of input
+
+        } // end of .searchBoxContainerFormInputContainer
+
+        .searchBoxContainerFormButtonContainer2 {
+
+            margin  : 0 0 0 0;
+
+            > button {
+
+                @include button();
+
+                display: block;
+
+                padding : 1.5rem 2.2rem;
+
+                border        : none; // get rid of the default border
+                border-radius : 0; // get rid of the default radius
+
+                font-family    : $font-primary-4;
+                font-size      : 1.75rem;
+                color          : $white;
+                letter-spacing : 0.5px;
+                text-transform : none;
+
+                background : none; // do a transparent background
+
+                transition : all 0.2s ease-out;
+
+                @media all and ( max-width : $bp-375 ) {
+
+                    padding : 1.0rem 1.5rem;
+    
+                }
+
+                // hover and active selectors
+                &:hover, &:active {
+
+                    border-radius : 6px;
+
+                    background-color : rgba( 255, 255, 255, 0.05 );
+
+                    // move the background color up just a little to add a nice hoover effect
+                    transform: translate3d( 0, -3px, 0 );
+
+                    // remove the animation effect for screen sizes under 1280 pixels
+                    @media all and ( max-width : $bp-1280 ) {
+
+                        background-color : inherit;
+
+                        transform: none;
+                
+                    }
+
+                } // end of li > > a:hover, > li > a:active
+
+            } // end of button
+        
+        } // end of searchBoxContainerFormButtonContainer2
+
+    } // end of form
+
+} // searchBoxContainer
+

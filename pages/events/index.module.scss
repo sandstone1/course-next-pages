@@ -11,11 +11,13 @@
 
     display     : grid; // this + margin : auto below helped center the h1 element
     grid-column : 2 / 12;
+    width       : 100%; // had to give this container a width of 100% in order for the children
+    // elements to take up the entire container - not sure why this happened
     margin      : 0 0 6.0rem 0;
 
     > h1 {
 
-        display : inline-block; // make the background take up the width of the button and
+        //display : inline-block; // make the background take up the width of the button and
         // not the container
         margin  : 12.0rem auto 6.0rem auto;
         padding : 1.2rem 4.8rem;

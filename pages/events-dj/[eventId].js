@@ -37,7 +37,7 @@ export default function EventDetailsPage(  ) {
     const router = useRouter();
 
     // use destructuring to get the eventId
-    const { eventId } = router.query;
+    const { eventId = {} } = router.query;
 
     // ==============================
     // filter method
@@ -51,12 +51,25 @@ export default function EventDetailsPage(  ) {
 
     } );
 
-    // use destructuring to get the object from the filteredEvent array
-    const [ selectedEventObject ] = filteredEvent;
+    // ==============================
+    // frontend validation
+    // ==============================
 
-    // this returns the correct event object and then I can destructure the event below but
-    // I decided to use filteredEvent[0].objectKeyName instead
-    console.log( selectedEventObject )
+    if ( !filteredEvent[0] ) {
+
+        // if the event does not exist then set a new error message
+        return (
+
+            <p>
+                The event was not found. Please close this message to go back to the events page and try again.
+            </p>
+
+        );
+
+    } // end of if
+
+    // make sure we are getting the right event
+    console.log( filteredEvent[0] )
 
     // ==============================
     // destructure event
@@ -73,7 +86,7 @@ export default function EventDetailsPage(  ) {
         description,
         venue,
         address
-    } = selectedEventObject;
+    } = filteredEvent[0];
 
     // ==============================
     // useSession();
@@ -133,6 +146,7 @@ export default function EventDetailsPage(  ) {
 
                 <img
                     src={ filteredEvent[0].image ? filteredEvent[0].image : '/images/event-default.png' }
+                    alt="filtered event"
                 />
                 
                 <h1 className={ styles.eventDetailsPageContainerDiv2H1Second }>

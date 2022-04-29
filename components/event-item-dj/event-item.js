@@ -53,6 +53,7 @@ export default function EventItem( { event } ) {
 
                     <img
                         src={ image ? image : '/images/event-default.png' }
+                        alt="event image"
                     />
 
                 </div>

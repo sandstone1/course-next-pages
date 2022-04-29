@@ -1,0 +1,319 @@
+
+
+// ==============================
+// PARTIAL IMPORTS
+// ==============================
+
+@import '../../styles/_color_variables.scss';
+@import '../../styles/_font_variables.scss';
+@import '../../styles/_mixins.scss';
+@import '../../styles/_responsive_breakpoints.scss';
+
+
+.commentContainer {
+
+    margin : 9.0rem 0 0 0;
+
+    // div 1 - show / hide comments button
+    .commentContainerDiv1ButtonContainer {
+
+        display         : flex;
+        // justify-content : center;
+        margin          : 4.0rem 0 0 0;
+
+        > button {
+
+            @include button();
+
+            border-radius : 4px;
+
+            letter-spacing : 1px;
+
+            background : rgba(220, 53, 69, 1);
+    
+            // had to do " outline : none; " in order to get rid of the weird outline or coloring
+            // around the button element after clicking the button
+            outline : none;
+    
+            &:hover {
+    
+                background : rgba(200, 43, 59, 1);
+    
+            }
+
+        } // end of button
+
+    } // end of button container
+
+    // div 2 - comment form container
+    .commentContainerDiv2 {
+
+        display : grid;
+        margin  : 8.0rem 0 8.0rem 0;
+        padding : 6.0rem 0;
+
+        border        : 1px solid rgba( 220, 220, 220, 1 );
+        border-radius : 6px;
+
+        justify-content : center;
+        text-align : center;
+
+        // give the comment container a sightly different background color and this results
+        // in a nice visual effect
+        background-color: rgba( 253, 253, 253, 1 );
+
+        transition : border-color 0.15s ease;
+
+        &:hover,
+        &:focus,
+        &:active {
+
+            border-color : rgba( 0, 112, 243, 1 );
+
+        }
+
+        // div 2 - comment form container - heading
+        .commentContainerDiv2Heading {
+
+            margin : 0 0 1.0rem 0;
+
+            > h2 {
+
+                font-family : $font-primary-4;
+                font-size   : 2.4rem;
+                font-weight : 700;
+                color       : $gray-800;
+        
+            } // end of h2
+
+        } // end of commentContainerDiv2Heading
+
+        // div 2 - comment form container - comment form
+        .commentContainerDiv2ContentContainer1 {
+
+            // form
+            .commentContainerDiv2ContentContainer1Form {
+
+                width  : 380px;
+                margin : 0 auto;
+
+                // name, email and text area box container
+                .commentContainerDiv2ContentContainer1FormNameInputContainer,
+                .commentContainerDiv2ContentContainer1FormEmailInputContainer,
+                .commentContainerDiv2ContentContainer1FormCommentTextAreaContainer {
+
+                    position : relative;
+                    margin   : 2.5rem 0 4.0rem 0;
+
+                    // input element
+                    > input {
+
+                        display : block;
+                        width   : 100%;
+                        margin  : 0;
+                        padding : 12px 12px 12px 12px;
+
+                        border        : none;
+                        border-radius : 4px;
+                        border-bottom : 1px solid $gray-650;
+
+                        font-family : $font-primary-4;
+                        font-size   : 1.6rem;
+                        font-weight : 400;
+                        color       : $gray-900;
+
+                        // background-color : rgb( 255, 255, 255);
+
+                        &:focus {
+
+                            outline : none;
+
+                        }
+
+                        // The general sibling combinator (~) separates two selectors and matches the
+                        // second element only if it follows the first element (though not necessarily
+                        // immediately), and both are children of the same parent
+
+                        // what this says below is that whenever the user focuses inside the input element
+                        // we want to use the general sibling combinator to target the form input label
+                        // element and give the label an opacity of 0 and use a transition is give the
+                        // movement a nice feel
+                        &:focus ~ .commentContainerDiv2ContentContainer1FormNameInputContainerLabel,
+                        &:focus ~ .commentContainerDiv2ContentContainer1FormEmailInputContainerLabel {
+
+                            opacity : 0;
+
+                        }
+
+                    } // end of the input element
+
+                    // text area box
+                    > textarea {
+
+                        display : block;
+                        width   : 100%;
+                        margin  : 0;
+                        padding : 12px 12px 12px 12px;
+
+                        border        : 1px solid $gray-650;
+                        border-radius : 4px;
+
+                        font-family : $font-primary-4;
+                        font-size   : 1.6rem;
+                        font-weight : 400;
+                        color       : $gray-900;
+
+                        // had specify the following key value pair in order to match the
+                        // parent container background color
+                        background-color: rgba( 253, 253, 253, 1 );
+
+                        &:focus {
+
+                            outline : none;
+
+                        }
+
+                        // The general sibling combinator (~) separates two selectors and matches the
+                        // second element only if it follows the first element (though not necessarily
+                        // immediately), and both are children of the same parent
+
+                        // what this says below is that whenever the user focuses inside the input element
+                        // we want to use the general sibling combinator to target the form input label
+                        // element and give the label an opacity of 0 and use a transition is give the
+                        // movement a nice feel
+                        &:focus ~ .commentContainerDiv2ContentContainer1FormCommentTextAreaContainerLabel {
+
+                            opacity : 0;
+
+                        }
+
+                    } // end of text area box
+
+
+                    // input label
+                    .commentContainerDiv2ContentContainer1FormNameInputContainerLabel,
+                    .commentContainerDiv2ContentContainer1FormEmailInputContainerLabel,
+                    .commentContainerDiv2ContentContainer1FormCommentTextAreaContainerLabel {
+
+                        position : absolute;
+                        top      : 12px;
+                        left     : 12px;
+
+                        font-family : $font-primary-4;
+                        font-size   : 1.6rem;
+                        font-weight : 400;
+                        color       : $gray-900;
+
+                        pointer-events : none;
+                        transition     : opacity 200ms ease;
+
+                    } // end of the input label
+
+                    // input label shrink
+                    .commentContainerDiv2ContentContainer1FormNameInputContainerLabelShrink,
+                    .commentContainerDiv2ContentContainer1FormEmailInputContainerLabelShrink,
+                    .commentContainerDiv2ContentContainer1FormCommentTextAreaContainerLabelShrink {
+
+                        display: none;
+                    
+                    } // end of input label shrink
+
+                } // end of email input container
+
+                // button container
+                .commentContainerDiv2ContentContainer1FormButtonContainer {
+
+                    display : grid;
+                    margin  : 4.0rem 0 0 0;
+
+                    > button {
+
+                        @include button();
+
+                        border-radius : 4px;
+
+                        letter-spacing : 1px;
+
+                        background : rgba(220, 53, 69, 1);
+                
+                        // had to do " outline : none; " in order to get rid of the weird outline or coloring
+                        // around the button element after clicking the button
+                        outline : none;
+                
+                        &:hover {
+                
+                            background : rgba(200, 43, 59, 1);
+                
+                        }
+
+                    } // end of button
+
+                } // end of button container
+
+            } // end of form
+
+        } // end of commentContainerDiv2ContentContainer1
+
+    } // end of commentContainerDiv2
+
+    // div 3 - comment container
+    .commentContainerDiv3 {
+
+        // div 3 - comment container - heading
+        .commentContainerDiv3Heading {
+
+            margin : 0 0 1.0rem 0;
+
+            > h2 {
+
+                font-family : $font-primary-4;
+                font-size   : 2.4rem;
+                font-weight : 700;
+                color       : $gray-800;
+
+                text-align : center;
+        
+            } // end of h2
+
+        } // end of commentContainerDiv2Heading
+
+        // div 3 - comment container - comment list
+        .commentContainerDiv3ContentContainer1 {
+
+            margin : 4.0rem 0 8.0rem 0;
+
+            > ul > li {
+
+                margin  : 0 0 2.0rem 0;
+                padding : 0 0 2.0rem 0;
+
+                border-bottom : 1px solid rgba( 220, 220, 220, 1 );
+
+                font-family : $font-primary-4;
+                font-size   : 1.6rem;
+                font-weight : 400;
+                color       : $gray-900;
+
+                > div {
+
+                    font-style : italic;
+                    text-align : right;
+
+                } // end of .commentContainerDiv3ContentContainer1 > ul > li > div
+
+            } // end of .commentContainerDiv3ContentContainer1 > ul > li
+
+            // :nth-last-child() counts from the bottom up so :nth-last-child( 1 ) is
+            // the last child
+            > ul > li:nth-last-child( 1 ) {
+
+                border-bottom : none;
+
+            }
+
+        } // end of .commentContainerDiv3ContentContainer1
+
+    } // end of commentContainerDiv3
+
+} // end of commentContainer
+
