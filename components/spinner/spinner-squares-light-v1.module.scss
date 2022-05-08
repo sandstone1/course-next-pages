@@ -1,0 +1,104 @@
+
+
+
+.spinnerContainer {
+    
+    display         : grid;
+    align-content   : center;
+    justify-content : center;
+
+    > .spinnerContainerMain {
+
+        position : relative; // relative since the children divs will be positioned
+        // absolute
+        width    : 85px;
+        height   : 85px;
+
+        perspective : 200px; // this means that all elements inside this container are given
+        // a 3D space and the lower the perspective is the more 3D the elements will look
+
+        > .spinnerContainerMainDiv1 {
+
+            position : absolute;
+            top      : 0;
+            width    : 50px;
+            height   : 50px;
+
+            background-color : rgba( 255, 127, 80, 1 );
+
+            // create the animation effect
+            // duration is 2 seconds and the speed curve of the animation is linear and
+            // and we want the spinner to continuing repeating infinitely
+            animation        : flippingSquares 2s linear 0s infinite;
+            transform-origin : right bottom; // this will make the squares look like they are
+            // walking around
+
+        } // end of spinnerContainerMainDiv1
+
+        > .spinnerContainerMainDiv2 {
+
+            position : absolute;
+            top      : 0;
+            width    : 50px;
+            height   : 50px;
+
+            background-color : rgba( 255, 127, 80, 1 );
+
+            // create the animation effect
+            // duration is 2 seconds and the speed curve of the animation is linear and
+            // and we want the spinner to continuing repeating infinitely and let's add
+            // a delay to this div to make it look like the second div is following the
+            // first div
+            animation        : flippingSquares 2s linear 1s infinite;
+            transform-origin : right bottom; // this will make the squares look like they are
+            // walking around
+
+        }  // end of spinnerContainerMainDiv2
+
+    } // end of spinnerContainerMain
+
+} // end of spinner container
+
+
+
+// ==============================
+// build the animation
+// ==============================
+
+// create an animation for the top portion of the border
+@keyframes flippingSquares {
+
+    0% {
+
+        // rotate around both the x and y axis 
+        transform : rotateX( 0 ) rotateY( 0 );
+
+    }
+
+    25% {
+
+        transform : rotateX( 0 ) rotateY( 180deg );
+
+    }
+
+    50% {
+
+        transform : rotateX( 180deg ) rotateY( 180deg );
+
+    }
+
+    75% {
+
+        transform : rotateX( 180deg ) rotateY( 0 );
+
+    }
+
+    100% {
+
+        transform : rotateX( 0 ) rotateY( 0 );
+
+    }
+
+} // end of flippingSquares
+
+

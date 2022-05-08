@@ -556,23 +556,15 @@ export async function getStaticProps( context ) {
 // regenerate the page on the server if we set the revalidate key to a certain value
 
 // import in useState(); hook
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 // import in axios
 import axios from 'axios';
 // import in the EventItem component
 import EventItem from '../components/event-item/event-item';
-// import in the scss file
-import styles from './index-hero-image-screen-v2.module.scss';
-
-
-// 2 - 
-
 // import in the NewsletterRegistrationComponent
 import NewsletterRegistrationComponent from '../components/newsletter/newsletter-registration';
-
-// add the component below
-
-// End of 2 -
+// import in the scss file
+import styles from './index-hero-image-screen-v2.module.scss';
 
 
 export default function HomePage( { featuredEvents } ) {
@@ -612,77 +604,100 @@ export default function HomePage( { featuredEvents } ) {
     // useEffect();
     // ==============================
 
+    useEffect( () => {
+
+        // get the header element and use this element in styled jsx below
+        const header = document.getElementsByTagName( 'Header' );
+
+        // get the main element and use this element in styled jsx below
+        const main = document.getElementsByTagName( 'Main' );
+
+        // get the nav element and use this element in styled jsx below
+        const nav = document.getElementsByTagName( 'Nav' );
+
+        // get the footer element and use this element in styled jsx below
+        const footer = document.getElementsByTagName( 'Footer' );
+
+    }, [] ); // end of useEffect();
+
     return (
 
         <div className={ styles.homePageContainer }>
 
             { /* div 1 */ }
-            <div className={ styles.homePageContainerNewsletterRegistrationContainer }>
+            <div className={ styles.homePageContainerFeaturedEventsContainer }>
 
-                <NewsletterRegistrationComponent />
+                <h2 className={ styles.homePageContainerFeaturedEventsContainerH2 }>Featured Events</h2>
+
+                <div className={ styles.homePageContainerFeaturedEventsContainerFeaturedEvents }>
+                
+                    {
+
+                        featuredEvents.length === 0 ? (
+                    
+                            <h3>There are no featured events to show</h3>
+        
+                        ) : (
+                        
+                            featuredEvents.map( ( event ) => (
+
+                                <EventItem
+                                    key={ event.id }
+                                    event={ event }
+                                />
+                    
+                            ) )
+                    
+                        )
+                    
+                    }
+
+                </div>
 
             </div>
 
             { /* div 2 */ }
-            <div className={ styles.homePageContainerImageContainer }>
+            <div className={ styles.homePageContainerNewsletterRegistrationContainer }>
 
-                <h2 className={ styles.homePageContainerImageContainerH2 }>Featured Events</h2>
+                <div className={ styles.homePageContainerNewsletterRegistrationContainerLeft }>
 
-            </div>
+                </div>
 
-            { /* div 3 */ }
-            <div className={ styles.homePageContainerContentContainer1 }>
+                <div className={ styles.homePageContainerNewsletterRegistrationContainerRight }>
 
-                {
+                    <NewsletterRegistrationComponent />
 
-                    featuredEvents.length === 0 ? (
-                
-                        <h3>There are no featured events to show</h3>
-    
-                    ) : (
-                    
-                        featuredEvents.map( ( event ) => (
-
-                            <EventItem
-                                key={ event.id }
-                                event={ event }
-                            />
-                
-                        ) )
-                
-                    )
-                
-                }
+                </div>
 
             </div>
 
             <style jsx global>
                 {`
                     // remember "We (i.e. next.js) bundle styled-jsx to provide support for isolated scoped CSS."
-                    body > div > div > main {
+                    main {
 
-                        height : 1650px; !important; // this is #3
+                        // height : 1650px !important; // this is #3
 
                     }
-                    body > div > div > header > nav {
+                    nav {
 
                         z-index : 1; // lay the header nav elements on top of the hero image element
 
                     }
-                    body > div > div > footer {
+                    footer {
 
                         z-index    : 0; // we did not have to change the z-index for the footer since the
                         // footer element appears later in the code
-                        background : sienna;
+                        background : rgba( 54, 60, 70, 1 );
 
                     }
-                    body > div > div > footer > h2,
-                    body > div > div > footer > div > span {
+                    footer > h2,
+                    footer > div > span {
 
                         color : rgba( 255, 255, 255, 1 ) !important; // change the footer text color to white
             
                     }
-                    body > div > div > footer > div > a {
+                    footer > div > a {
 
                         color           : rgba( 255, 255, 255, 1 ) !important; // change the footer text color to white
                         text-decoration : underline;  // underline " About " 
@@ -690,13 +705,13 @@ export default function HomePage( { featuredEvents } ) {
                     }
                     @media all and ( max-width : 1280px ) {
 
-                        body > div > div > main {
+                        main {
 
                             height : 2290px; !important; // this is #3
     
                         }
 
-                        body > div > div > header > nav > div:nth-child( 1 ) {
+                        header > nav > div:nth-child( 1 ) {
 
                             margin : 1.5rem 0 1.0rem 0 !important; // provide spacing between logo and nav elements on
                             // small screen sizes
@@ -706,36 +721,36 @@ export default function HomePage( { featuredEvents } ) {
                     }
                     @media all and ( max-width : 920px ) {
 
-                        body > div > div > main {
+                        main {
 
-                            height : 2190px; !important; // this is #3
+                            height : 2190px !important; // this is #3
     
                         }
 
                     }
                     @media all and ( max-width : 768px ) {
 
-                        body > div > div > main {
+                        main {
 
-                            height : 1940px; !important; // this is #3
+                            height : 1940px !important; // this is #3
     
                         }
 
                     }
                     @media all and ( max-width : 620px ) {
 
-                        body > div > div > main {
+                        main {
 
-                            height : 1740px; !important; // this is #3
+                            height : 1740px !important; // this is #3
     
                         }
 
                     }
                     @media all and ( max-width : 480px ) {
 
-                        body > div > div > main {
+                        main {
 
-                            height : 1440px; !important; // this is #3
+                            height : 1440px !important; // this is #3
     
                         }
 

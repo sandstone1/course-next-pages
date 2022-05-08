@@ -15,13 +15,13 @@ export async function hashPassword( password ) {
 } // end of hashedPassword
 
 
-export async function verifyPassword( password, hashedPassword ) {
+export async function verifyPassword( password, databasePassword ) {
 
     // bcrypt will compare the entered password or plain text password with the
     // database password or encrypted password and this will result in either true or
     // false and then we will save this boolean value to the const " passwordsAreEqual "
     // and then return that boolean value
-    const passwordsAreEqual = await bcrypt.compare( password, hashedPassword );
+    const passwordsAreEqual = await bcrypt.compare( password, databasePassword );
 
     // return passwordsAreEqual
     return passwordsAreEqual;

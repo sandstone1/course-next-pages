@@ -1,5 +1,10 @@
 
 
+// the function below will handle incoming requests sent to 
+// " localhost:3016/api/user/change-password-put " and inside the function we can execute
+// server side code and any code we write inside this function will never end up in
+// any client side code bundle
+
 // import in the getSession hook
 import { getSession } from 'next-auth/react';
 // import in the connectToDatabase function

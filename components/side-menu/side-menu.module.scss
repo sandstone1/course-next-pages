@@ -1,0 +1,128 @@
+
+
+// ==============================
+// PARTIAL IMPORTS
+// ==============================
+
+@import '../../styles/_color_variables.scss';
+@import '../../styles/_font_variables.scss';
+@import '../../styles/_responsive_breakpoints.scss';
+
+
+
+// side menu container
+.sideMenuContainer {
+
+    visibility : hidden; // hide the slide menu container on page load and I could
+    // have used " opacity : 0; " but chose " visibility : hidden; " instead
+    position   : fixed;
+    top        : 0;
+    right      : 0;
+    z-index    : 3;
+    width      : 30vw;
+    height     : 100vh;
+    padding    : 4.0rem 4.0rem 4.0rem 4.0rem;
+
+    background-color : $gold-100;
+
+    cursor     : pointer;
+    transition : all 0.3s ease-out;
+
+    // heading
+    > .sideMenuContainerHeading {
+
+        display         : flex;
+        align-items     : center;
+        justify-content : space-between;
+        margin          : 0 0 2.0rem 0;
+
+        > h3 {
+
+            margin : 0 0 0 0;
+    
+            font-family    : $font-primary-4;
+            font-size      : 2.0rem;
+            color          : $white;
+            letter-spacing : 1.0px;
+    
+        } // end of h3
+
+    } // end of sideMenuContainerHeading
+
+    // > ul
+    > ul {
+
+        display               : grid;
+        grid-template-rows    : repeat( 6, 10rem );
+        grid-template-columns : 25rem;
+        align-items           : center;
+        justify-content       : start;
+        justify-items         : start;
+
+        @media all and ( max-width : $bp-1280 ) {
+
+    
+        }
+
+        @media all and ( max-width : $bp-620 ) {
+
+    
+        }
+
+        // list items
+        > li {
+
+            // the anchor tabs
+            > a {
+
+                display : block; // needed for animation
+                //margin  : 0 0 1.5rem 0;
+                padding : 1.5rem 2.2rem 1.5rem 0;
+
+                // keep the size for border-bottom at 0.1px and not 0.1rem otherwise the border will
+                // tend to disappear as the viewport shrinks
+
+                border-bottom : 1px inset rgba( 0, 0, 0, .15 );
+
+                font-family    : $font-primary-4;
+                font-size      : 1.75rem;
+                color          : $white;
+                letter-spacing : 0.5px;
+
+                transition : all 0.2s ease-out;
+
+                @media all and ( max-width : $bp-375 ) {
+
+                    padding : 1.0rem 1.5rem;
+    
+                }
+
+            } // end of li > a
+
+            // hover and active selectors for the anchor tabs
+            a:hover, a:active {
+
+                border-radius : 6px;
+
+                background-color : rgba( 255, 255, 255, 0.05 );
+
+                // move the background color up just a little to add a nice hoover effect
+                transform: translate3d( 0, -3px, 0 );
+
+                // remove the animation effect for screen sizes under 1280 pixels
+                @media all and ( max-width : $bp-1280 ) {
+
+                    background-color : inherit;
+
+                    transform: none;
+            
+                }
+
+            } // end of a:hover, a:active
+
+        } // end of > li
+
+    } // end of > ul
+
+} // end of side menu container
+

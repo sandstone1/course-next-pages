@@ -1,49 +1,59 @@
 
 
-// ==============================
-// to send the request to pages/api/user/register-mongodb instead of
-// pages/api/user/register-mongoose then we need to make the following changes:
-// ==============================
-// 1 - change the endpoint in the user.state.js file
-// 2 - add isAdmin component state
-// 3 - add the isAdmin argument to userRegisterActionCreator(); below
-// 4 - add the isAdmin argument to userRegisterActionCreator(); in the user.state.js file
-// 5 - add the isAdmin argument to POST request in the userRegisterActionCreator(); in the
-// user.state.js file
+// when we click on the submit button we want to store the user name, email, password and
+// isAdmin boolean value to the database and remember we shouldn't talk to a database
+// from the front end of our application since that would be highly insecure
 
+// so here we fetching the user input on the front end and then once the user clicks the
+// submit button we send a request to the api route and then inside the api route we
+// connect to a database and then store the user's name, email, password and isAdmin
+// boolean value in a collection called " users "
+
+// and remember the code inside the api route will not be exposed to the website visitors
+// or the front end
 
 // since we are building a form we will need to use the useState(); hook
-import { Fragment, useContext, useEffect, useState } from 'react';
+import { Fragment, useState } from 'react';
 // import in the Link component
 import Link from 'next/link';
 // import in the getSession(); hook
 import { getSession } from 'next-auth/react';
-// import in the UserContext
-import UserContext from '../context/user/user-context';
 // import in the Spinner component
-import Spinner from '../components/spinner/spinner';
+import Spinner from '../components/spinner/spinner-bounce-dark';
 // import in the ErrorMessage component
-import ErrorMessage from '../components/error-message/em-register-page';
+import ErrorMessageComponent from '../components/error-message/em-register-component';
 // import in the SuccessMessage component
-import SuccessMessage from '../components/success-message/sm-register-page';
+import SuccessMessageComponent from '../components/success-message/sm-register-component';
 // import in our stylesheet
 import styles from './register.module.scss';
 
 
-const RegisterPage = () => {
+export default function RegisterPage() {
 
     // ==============================
     // component state
     // ==============================
 
+    // remember this initial state can be updated by using client side data fetching as
+    // needed
+
+    // remember we don't need to set component level state in order to see the data in the
+    // page source; however, it makes sense to set component level state if we will use
+    // client side data fetching to update the data as needed
+
     // set component level state
     const [ name, setName ]                                     = useState( '' );
     const [ email, setEmail ]                                   = useState( '' );
     const [ password, setPassword ]                             = useState( '' );
-    const [ isAdmin, setIsAdmin ]                               = useState( false );
     const [ confirmPassword, setConfirmPassword ]               = useState( '' );
+    const [ isAdmin, setIsAdmin ]                               = useState( false );
+    const [ isLoading, setIsLoading ]                           = useState( false );
     const [ frontendErrorMessage, setFrontendErrorMessage ]     = useState( '' );
     const [ frontendSuccessMessage, setFrontendSuccessMessage ] = useState( '' );
+
+    // ==============================
+    // destructure props
+    // ==============================
 
     // ==============================
     // useRef();
@@ -61,42 +71,9 @@ const RegisterPage = () => {
     // initialize the context
     // ==============================
 
-    // after we dispatch the action creator, the action creator will send the reducer actions
-    // and those actions will update the reducer and thereby update the state and then we can
-    // use the useContext(); hook to initialize the UserContext and then return the part of the
-    // state that we want
-    const userContext = useContext( UserContext );
-
-    // and then we can use destructuring to pull off pieces of the state that we want and then
-    // use those pieces of state in our output
-    const { 
-        userRegisterLoading,
-        userRegisterInfo,
-        userRegisterSuccess,
-        userRegisterError,
-        userRegisterActionCreator,
-        userRegisterResetActionCreator
-    } = userContext;
-
     // ==============================
     // useEffect();
     // ==============================
-
-    // if the user successfully registered then we want to show a success message
-    useEffect( () => {
-
-        if ( userRegisterSuccess ) {
-
-                // if the user successfully registered then show a success message
-                setFrontendSuccessMessage( 'You have successfully registered! Please close this message to be redirected to the home page.' );
-
-        } // end of if
-
-        return () => {
-            // clean-up functions
-        }
-
-    }, [ userRegisterSuccess ] ); // end of useEffect
 
     // ==============================
     // handleSubmit function
@@ -107,105 +84,116 @@ const RegisterPage = () => {
         e.preventDefault();
 
         // ==============================
-        // email validation function
+        // fetch API
         // ==============================
 
-        // this came from
-        // " https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript "
-        // and was the second answer on the page
-        function validateEmail( email ) {
+        // next we need to send the name, email, password, confirmPassword and isAdmin key
+        // value pairs to the register-post api route so that we can save the user's
+        // information in the database
 
-            // the regex
-            const regex = /\S+@\S+\.\S+/;
+        // we want to send an http request when the form is submitted
 
-            // test the regex against the email
-            const isEmailValid = regex.test( email );
+        // STEP 1
+        // initially, isLoading is set to true
+    
+        // remember we use the isLoading state primarily when we are communicating with the
+        // database from the frontend since there may be a short delay between the time from
+        // when the request is made to the time from when the server response is returned
+        setIsLoading( true );
 
-            // return the boolean isEmailValid
-            return isEmailValid;
+        // STEP 2
+        // create our endpoint
+        const endpoint = `/api/user/register-post`;
 
-        } // end of validateEmail
+        // create our data object
 
-        // ==============================
-        // password validation function
-        // ==============================
+        // create our config object
 
-        // this came from
-        // " https://stackoverflow.com/questions/19605150/regex-for-password-must-contain-at-least-eight-characters-at-least-one-number-a "
-        function validatePassword( password ) {
+        // STEP 3
+        // make the fetch request and save the result to the const called res
+        const res = await fetch(
+            endpoint,
+            // include the config object
+            {
+                method : 'POST',
+                body   : JSON.stringify(
+                    {
+                        name            : name,
+                        email           : email,
+                        password        : password,
+                        confirmPassword : confirmPassword,
+                        isAdmin         : isAdmin
+                    }
+                ),
+                headers : {
+                    'Content-Type' : 'application/json'
+                }
+            }
+        );
 
-            // the regex
-            const regex = /^[A-Za-z\d]{6,}$/;
+        // STEP 4(a)
+        // first, check to see if there is a request error
+        if ( !res.ok ) {
 
-            // test the regex against the password
-            const isPasswordValid = regex.test( password );
+            // STEP 4(b)
+            // the fetch request above returns a response object and then we can apply the
+            // json(); method to the reponse object and this will convert the response
+            // object into a JavaScript object that we can use and we will call this JavaScript
+            // object " data " and the data object in this case is the response we get back from
+            // the api route
+            const data = await res.json();
 
-            // return the boolean isPasswordValid
-            return isPasswordValid;
+            // STEP 4(c)
+            // once we get the data, set isLoading to false
+            setIsLoading( false );
 
-        } // end of validatePassword
+            // STEP 4(d)
+            // set the error message
+            setFrontendErrorMessage( data.message );
 
-        // ==============================
-        // frontend validation
-        // ==============================
-
-        // everytime we submit the form we need to clear out any prior error or success messages
-        setFrontendErrorMessage( '' );
-        setFrontendSuccessMessage( '' );
-
-        // before we dispatch the userRegisterActionCreator let's do some front end validation
-        if ( name === '' ||  email === '' || password === '' || confirmPassword === '' ) {
-
-            // if the user did not enter the required information in the name, email, password
-            // and / or confirm password fields then set a new error message
-            setFrontendErrorMessage( 'All fields must be filled out in order to register. Please try again.' );
-
-        } else if ( password !== confirmPassword ) {
-
-            // if the password does not match the confirm password then set the error message
-            setFrontendErrorMessage( 'Passwords do not match. Please try again.' );
-
-        } else if ( !validateEmail( email ) ) {
-
-            // if the email is not valid then set the error message
-            setFrontendErrorMessage( 'Your email is not valid. Please try again.' );
-
-        } else if ( !validatePassword( password ) ) {
-
-            // if the email is not valid then set the error message
-            setFrontendErrorMessage( 'Your password must be at least 6 characters and contain only numbers and letters. Please try again.' );
-
-        } else {
-
-            // ==============================
-            // dispatch our action creator
-            // ==============================
-
-            // dispatch our action creator
-            userRegisterActionCreator( name, email, password, isAdmin );
-
-            // reset the state
+            // STEP 4(e)
+            // reset the component state
             setName( '' );
             setEmail( '' );
             setPassword( '' );
-            setConfirmPassword( '' );            
-            
-        } // end of if / else if / else if / else if / else statement
+            setConfirmPassword( '' );
+
+        } else {
+
+            // STEP 5(a)
+            // the fetch request above returns a response object and then we can apply the
+            // json(); method to the reponse object and this will convert the response
+            // object into a JavaScript object that we can use and we will call this JavaScript
+            // object " data " and the data object in this case is the response we get back from
+            // the api route
+            const data = await res.json();
+
+            // STEP 5(b)
+            // once we get the data, set isLoading to false
+            setIsLoading( false );
+
+            // STEP 5(c)
+            // console.log data for the moment
+            console.log( data );
+
+            // STEP 5(d)
+            // set the success message
+            setFrontendSuccessMessage( data.message );
+
+            // STEP 5(e)
+            // reset the component state
+            setName( '' );
+            setEmail( '' );
+            setPassword( '' );
+            setConfirmPassword( '' );
+
+        }
+
+        // ==============================
+        // end of fetch API
+        // ==============================
 
     } // end of handleSubmit
-
-    // ==============================
-    // handleMessageReset function
-    // ==============================
-
-    const handleMessageReset = async ( e ) => {
-
-        // dispatch our action creator and reset the state for userRegisterError and
-        // userRegisterSuccess
-        // ( see the user.state.js and user.reducer.js files for details )
-        userRegisterResetActionCreator();
-
-    } // end of handleMessageReset
 
 
     return (
@@ -214,36 +202,29 @@ const RegisterPage = () => {
 
             {
 
-                userRegisterLoading ? (
+                isLoading ? (
 
-                    <Spinner />
+                    <div className={ styles.spinnerContainer }>
+
+                        <Spinner />
+
+                    </div>
 
                 ) : frontendErrorMessage ? (
 
-                    <ErrorMessage
-                        setFrontendErrorMessage={ setFrontendErrorMessage }
-                        onClose={ handleMessageReset }
+                    <ErrorMessageComponent                    
+                        resetFrontendErrorMessage={ () => setFrontendErrorMessage( '' ) }
                     >
                         { frontendErrorMessage }
-                    </ErrorMessage>
-
-                ) : userRegisterError ? (
-
-                    <ErrorMessage
-                        setFrontendErrorMessage={ setFrontendErrorMessage }
-                        onClose={ handleMessageReset }
-                    >
-                        { userRegisterError }
-                    </ErrorMessage>
+                    </ErrorMessageComponent>
 
                 ) : frontendSuccessMessage ? (
 
-                    <SuccessMessage
-                        setFrontendSuccessMessage={ setFrontendSuccessMessage }
-                        onClose={ handleMessageReset }
+                    <SuccessMessageComponent                    
+                        resetFrontendSuccessMessage={ () => setFrontendSuccessMessage( '' ) }
                     >
                         { frontendSuccessMessage }
-                    </SuccessMessage>
+                    </SuccessMessageComponent>
 
                 ) : (
 
@@ -458,8 +439,5 @@ export async function getServerSideProps( context ) {
     // sign in page
 
 } // end of getServerSideProps
-
-
-export default RegisterPage;
 
 

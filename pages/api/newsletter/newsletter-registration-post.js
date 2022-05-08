@@ -80,6 +80,10 @@ export default async function handler( req, res ) {
     // Server side validation - validate the email
     // ==============================
 
+    // ==============================
+    // Email validation function
+    // ==============================
+
     // this came from
     // " https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript "
     // and was the second answer on the page
@@ -117,6 +121,10 @@ export default async function handler( req, res ) {
     // ==============================
 
     // ==============================
+    // Run connectToDatabase function and get client
+    // ==============================
+
+    // ==============================
     // Define client
     // ==============================
 
@@ -135,7 +143,7 @@ export default async function handler( req, res ) {
     try {
 
         // ==============================
-        // Get client and connect to the database
+        // Run connectToDatabase function and get client
         // ==============================
 
         // get client
@@ -146,10 +154,6 @@ export default async function handler( req, res ) {
         // ==============================
         // If connecting to the database fails
         // ==============================
-
-        // if the database connection fails then in the catch block in the db_mongodb.js file
-        // we will catch the error and then we want to send back an error message to the
-        // frontend
 
         // one way to test the connectToDatabase() function in the db_mongodb.js file is to
         // change the MONGO_URI environemnt variable value inside the .env file and remember
@@ -185,6 +189,10 @@ export default async function handler( req, res ) {
     // access the collection and if it does not exist then MongoDB will create that collection
     // on the fly
     const newsletterRegistrationCollection = await db.collection( 'newsletter registration' );
+
+    // ==============================
+    // Find out if the document already exist
+    // ==============================
 
     // if we find a document in the database with an email that matches the email above
     // then we know that the email is already registered

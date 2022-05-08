@@ -1,0 +1,147 @@
+
+
+// ==============================
+// PARTIAL IMPORTS
+// ==============================
+
+@import '../../styles/_color_variables.scss';
+
+
+
+.spinnerContainer {
+    
+    display         : grid;
+    align-content   : center;
+    justify-content : center;
+
+    > .spinnerContainerMain {
+
+        display         : flex; // flex makes it easy to display the content on the
+        // horizontal axis
+        align-items     : flex-end;
+        justify-content : space-around;
+        width           : 85px;
+        height          : 85px;
+
+        > .spinnerContainerMainDiv1 {
+
+            width  : 20px;
+            height : 20px;
+
+            border-radius : 50%; // make border circular
+
+            background-color : $blue-100;
+
+            // create the animation effect
+            // duration is 0.5 seconds and the speed curve of the animation is
+            // cubic-bezier( .19, .57, .3, .98 ) and this provides for a nice bounce effect
+            // and we want the spinner to continuing repeating infinitely and we want to run
+            // the animation in alternate cycles by using the keyword alternate and with
+            // alternate the animation is played forwards first and then backwards
+
+            // more importantly, alternate creates a bounce in the animation
+
+            // lastly, let's delay the animation for the last 3 balls
+            animation : bounce 0.5s cubic-bezier( .19, .57, .3, .98 ) 0.0s infinite alternate;
+
+        } // end of spinnerContainerMainDiv1
+
+        > .spinnerContainerMainDiv2 {
+
+            width  : 20px;
+            height : 20px;
+
+            border-radius : 50%; // make border circular
+
+            background-color : $blue-100;
+
+            // create the animation effect
+            // duration is 0.5 seconds and the speed curve of the animation is
+            // cubic-bezier( .19, .57, .3, .98 ) and this provides for a nice bounce effect
+            // and we want the spinner to continuing repeating infinitely and we want to run
+            // the animation in alternate cycles by using the keyword alternate and with
+            // alternate the animation is played forwards first and then backwards
+
+            // more importantly, alternate creates a bounce in the animation
+
+            // lastly, let's delay the animation for the last 3 balls
+            animation : bounce 0.5s cubic-bezier( .19, .57, .3, .98 ) 0.1s infinite alternate;
+
+        }  // end of spinnerContainerMainDiv2
+
+        > .spinnerContainerMainDiv3 {
+
+            width  : 20px;
+            height : 20px;
+
+            border-radius : 50%; // make border circular
+
+            background-color : $blue-100;
+
+            // create the animation effect
+            // duration is 0.5 seconds and the speed curve of the animation is
+            // cubic-bezier( .19, .57, .3, .98 ) and this provides for a nice bounce effect
+            // and we want the spinner to continuing repeating infinitely and we want to run
+            // the animation in alternate cycles by using the keyword alternate and with
+            // alternate the animation is played forwards first and then backwards
+
+            // more importantly, alternate creates a bounce in the animation
+
+            // lastly, let's delay the animation for the last 3 balls
+            animation : bounce 0.5s cubic-bezier( .19, .57, .3, .98 ) 0.2s infinite alternate;
+
+        }  // end of spinnerContainerMainDiv3
+
+        > .spinnerContainerMainDiv4 {
+
+            width  : 20px;
+            height : 20px;
+
+            border-radius : 50%; // make border circular
+
+            background-color : $blue-100;
+
+            // create the animation effect
+            // duration is 0.5 seconds and the speed curve of the animation is
+            // cubic-bezier( .19, .57, .3, .98 ) and this provides for a nice bounce effect
+            // and we want the spinner to continuing repeating infinitely and we want to run
+            // the animation in alternate cycles by using the keyword alternate and with
+            // alternate the animation is played forwards first and then backwards
+
+            // more importantly, alternate creates a bounce in the animation
+
+            // lastly, let's delay the animation for the last 3 balls
+            animation : bounce 0.5s cubic-bezier( .19, .57, .3, .98 ) 0.3s infinite alternate;
+
+        }  // end of spinnerContainerMainDiv4
+
+    } // end of spinnerContainerMain
+
+} // end of spinner container
+
+
+
+// ==============================
+// build the animation
+// ==============================
+
+// create an animation for the top portion of the border
+@keyframes bounce {
+
+    from {
+
+        transform : translateY( 0 );
+
+    }
+
+    to {
+
+        transform : translateY( -75px ); // -75px will move the ball upwards along the
+        // y axis
+
+    }
+
+} // end of bounce
+
+
+

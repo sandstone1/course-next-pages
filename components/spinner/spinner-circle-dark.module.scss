@@ -1,0 +1,120 @@
+
+
+// ==============================
+// PARTIAL IMPORTS
+// ==============================
+
+@import '../../styles/_color_variables.scss';
+
+
+.spinnerContainer {
+    
+    display         : grid;
+    align-content   : center;
+    justify-content : center;
+
+    > .spinnerContainerMain {
+
+        position : relative;
+        width    : 85px;
+        height   : 85px;
+
+        > .spinnerContainerMainDiv1 {
+
+            position : absolute;
+            width    : 100%;
+            height   : 100%;
+
+            border           : 14px solid transparent; // create a transparent border
+            border-top-color : $blue-100; // override the tranparent color
+            // of the border on the top portion
+            border-radius    : 50%; // make border circular
+
+            // create the animation effect
+            // duration is 1.2 seconds and the speed curve is linear and we want the spinner
+            // to continuing repeating infinitely
+            animation : spinnerRotateOne 1.2s linear infinite;
+
+        } // end of spinnerContainerMainDiv1
+
+        > .spinnerContainerMainDiv2 {
+
+            position : absolute;
+            width    : 100%;
+            height   : 100%;
+
+            border              : 14px solid transparent; // create a transparent border
+            border-bottom-color : $blue-100; // override the tranparent color
+            // of the border on the top portion
+            border-radius       : 50%; // make border circular
+
+            // create the animation effect
+            // duration is 1.2 seconds and the speed curve is linear and we want the spinner
+            // to continuing repeating infinitely
+            animation : spinnerRotateTwo 1.2s linear infinite;
+
+        } // end of spinnerContainerMainDiv2
+
+    } // end of spinnerContainerMain
+
+} // end of spinner container
+
+
+
+// ==============================
+// build the animation
+// ==============================
+
+// create an animation for the top portion of the border
+@keyframes spinnerRotateOne {
+
+    0% {
+
+        transform    : rotate( 0deg );
+        border-width : 14px;
+
+    }
+
+    50% {
+
+        transform    : rotate( 180deg );
+        border-width : 1px;
+
+    }
+
+    100% {
+
+        transform    : rotate( 360deg );
+        border-width : 14px;
+
+    }
+
+} // end of SpinnerRotateOne
+
+
+// create an animation for the bottom portion of the border
+@keyframes spinnerRotateTwo {
+
+    0% {
+
+        transform    : rotate( 0deg );
+        border-width : 1px;
+
+    }
+
+    50% {
+
+        transform    : rotate( 180deg );
+        border-width : 14px;
+
+    }
+
+    100% {
+
+        transform    : rotate( 360deg );
+        border-width : 1px;
+
+    }
+
+} // end of SpinnerRotateTwo
+

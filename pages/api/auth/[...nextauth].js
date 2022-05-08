@@ -435,8 +435,11 @@ export default NextAuth(
                             // we throw an Error
                             client.close();
 
-                            // if we have an error inside the authorize() function then we want
-                            // to throw an error or " throw new Error(); "
+                            // comment out res.status(); and res.json(); when using next auth
+
+                            // if we have an error inside the authorize() function then we have to
+                            // use the following syntax: " throw new Error(); " or in other words
+                            // we have to throw an error
                             throw new Error( 'You have entered an invalid email. Please try again.' );
 
                         } // end of if
@@ -493,10 +496,11 @@ export default NextAuth(
                             // we throw an Error
                             client.close();
 
-                            // comment out res.status( 401 ); when using next auth
+                            // comment out res.status(); and res.json(); when using next auth
 
-                            // if we have an error inside the authorize() function then we want
-                            // to throw an error or " throw new Error(); "
+                            // if we have an error inside the authorize() function then we have to
+                            // use the following syntax: " throw new Error(); " or in other words
+                            // we have to throw an error
                             throw new Error( 'You have entered an invalid password. Please try again.' );
 
                         } // end of if else

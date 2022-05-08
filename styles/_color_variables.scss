@@ -21,10 +21,14 @@ $black    : rgba( 0, 0, 0, 1 );
 
 
 $blue-50           : rgba( 240, 255, 255, 1 );
+$blue-75           : rgba( 30, 144, 255, 1 );
 $blue-100          : rgba( 62, 139, 221, 1 );
 $blue-200          : rgba( 94, 125, 187, 1 );
 $blue-250          : rgba( 65, 105, 225, 1 );
+$blue-275          : rgba( 84, 115, 177, 1 );
 $blue-300          : rgba( 74, 105, 167, 1 );
+$blue-325          : rgba( 67, 89, 134, 1 );
+$blue-350          : rgba( 57, 79, 124, 1 );
 $blue-400          : rgba( 64, 99, 171, 1 );
 $blue-500          : rgba( 44, 79, 151, 1 );
 $blue-600          : rgba( 24, 59, 131, 1 );
@@ -98,9 +102,9 @@ $light     : $white;
 $dark      : $gray-800;
 
 
-$blue-background-1 : linear-gradient( 90deg, rgba( 15, 50, 85, 1 ) 0%, rgba( 15, 50, 85, 1 ) 50%, rgba( 35, 70, 105, 1 ) 100% );
-$blue-background-2 : linear-gradient( 90deg, rgba( 30, 96, 128, 1 ) 0%, rgba( 72, 88, 135, 1 ) 50%, rgba( 15, 102, 110, 1 ) 100% );
+$blue-background-1 : linear-gradient( 90deg, rgba( 15, 50, 85, 1 ) 0%, rgba( 15, 50, 85, 1 ) 50%, rgba( 15, 50, 85, 1 ) 100% );
+$blue-background-2 : linear-gradient( 90deg, rgba( 35, 70, 105, 1 ) 0%, rgba( 35, 70, 105, 1 ) 50%, rgba( 35, 70, 105, 1 ) 100% );
+$blue-background-3 : linear-gradient( 90deg, rgba( 30, 96, 128, 1 ) 0%, rgba( 72, 88, 135, 1 ) 50%, rgba( 15, 102, 110, 1 ) 100% );
 $gray-background-1 : linear-gradient( 90deg, rgba( 61, 71, 98, 1 ) 0%, rgba( 61, 61, 70, 1 ) 50%, rgba( 61, 71, 98, 1 ) 100% );
 $gray-background-2 : linear-gradient( 90deg, rgba( 22, 30, 51, 1 ) 0%, rgba( 61, 61, 70, 1 ) 50%, rgba( 22, 30, 51, 1 ) 100%);
 $gray-background-3 : linear-gradient( to bottom, rgba( 61, 71, 98, 1 ),  rgba( 81, 91, 118, 1 ) );
-

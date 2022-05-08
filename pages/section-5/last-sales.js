@@ -834,7 +834,7 @@ import useSWR from 'swr';
 // import in the variable " API_URL "
 import { API_URL } from '../../config/index';
 // import in the ErrorMessage component
-import ErrorMessage from '../../components/error-message/em-register-page';
+import ErrorMessage from '../../components/error-message/em-register-component';
 // import in the Spinner component
 import Spinner from '../../components/spinner/spinner';
 // import in our stylesheet

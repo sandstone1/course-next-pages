@@ -2,7 +2,8 @@
 
 // ==============================
 // this index-hero-image-screen-v2.module.scss file has a full screen image with an
-// integrated header and a separate footer
+// integrated header as div 1 and then a content section for div 2 and then a
+// separate footer
 // ==============================
 
 
@@ -18,14 +19,12 @@
 .homePageContainer {
 
     display               : grid;
-    grid-template-rows    : min-content 0 min-content;  // doing pixels instead of rem keeps the
-    // row hieght at 1000px as the screen becomes smaller
+    grid-template-rows    : 1440px 1000px;    
     grid-template-columns : minmax( 6rem, 1fr )                        // col 1 - 2    ( column 1 )
                             repeat( 10, minmax( min-content, 12rem ) ) // col 2 - 12   ( column 2 - 11 )
                             minmax( 6rem, 1fr );                       // col 12 - 13  ( column 12 )
     grid-template-areas   : "div1"
-                            "div2"
-                            "div3";
+                            "div2";                            
     grid-column           : 1 / -1; // do this so that the child elements take up the entire
     // screen horizontally
 
@@ -54,27 +53,15 @@
     // div #1
     // ==============================
 
-    .homePageContainerNewsletterRegistrationContainer {
+    .homePageContainerFeaturedEventsContainer {
 
-        grid-area    : div1;
-        grid-row     : 1 / 2;
-        grid-column  : 2 / 12;
-        z-index      : 1;
-        margin       : 0 0 28.0rem 0;
-
-    } // end of homePageContainerNewsletterRegistrationContainer
-
-    // ==============================
-    // div #2
-    // ==============================
-
-    .homePageContainerImageContainer {
-    
-        grid-area   : div2; // put these here for clarity but not necessary
-        grid-row    : 2 / 3; // put these here for clarity but not necessary
-        grid-column : 2 / 12; // put these here for clarity but not necessary
-        height      : 1810px; // visual preference and this is hard coded and tied to main height
-        // on the index.js page
+        display         : grid;
+        grid-area       : div1;
+        justify-content : center; // position the children elements in the center of the screen
+        align-content   : start; // position the children elements at the top of the screen
+        height          : 1600px; // had to set the height to 1600px to make the background image
+        // encompass both the header and the homePageContainer div 1 and this is tied to main
+        // height on the index.js page
         // this is #2
 
         @media all and ( max-width : $bp-1280 ) {
@@ -108,34 +95,31 @@
         }
 
         // ==============================
-        // Image hero element ( full page ) that lays on top of the header element and the main element
+        // Image hero element ( almost full page ) that lays on top of the header element and div 1
         // ==============================
 
         // ****
         // remember we are using styled jsx in the index.js file to lay the header nav elements
         // on top of the hero image element
         // ****
-
+        
         position : absolute;
         left     : 0;
         top      : 0;
         right    : 0;
         bottom   : 0;
 
-        background-image      : linear-gradient( to bottom, rgba( 61, 71, 98, 0.9 ),  rgba( 81, 91, 118, 0.9 ) ), url( ../public/images/networking_hero_01.jpg );
+        background-image      : linear-gradient( to bottom, rgba( 61, 71, 98, 0.9 ),  rgba( 81, 91, 118, 0.9 ) ), url( ../public/images/louvre_museum_01.jpg );
         background-position   : center; 
         background-size       : cover;
         background-blend-mode : multiply;
+        background-color      : $blue-100; // this combination looked a little better than using just
+        // " background-image : $blue-background-1, url( ../public/images/louvre_museum_01.jpg ); "
+        // with no background-color
 
-        background-color : $blue-100;
+        > .homePageContainerFeaturedEventsContainerH2 {
 
-        .homePageContainerImageContainerH2 {
-
-            margin  : 71.0rem 0 0 0; // had to move the h2 down 71 rem by using the margin
-            // bottom key value pair since the absolutely positioned image above was preventing
-            // the implementation of " grid-area : div2; " and " grid-row : 2 / 3; " in the
-            // parent component above
-            padding : 0 0 0 0;
+            margin : 29.0rem 0 10.0rem 0;
 
             font-family    : $font-primary-4;
             font-size      : 3.2rem;
@@ -146,34 +130,97 @@
 
         } // end of title
 
-    } // end of homePageContainerImageContainer
+        > .homePageContainerFeaturedEventsContainerFeaturedEvents {
+
+            width : 1200px;
+
+            > h3 {
+
+                margin : 10.0rem 0 8.0rem 0;
+
+                font-family    : $font-primary-4;
+                font-size      : 2.4rem;
+                font-weight    : 700;
+                color          : $gray-225;
+                letter-spacing : 1px;
+                text-align     : center;
+
+            } // end of h3
+
+        } // end of featured events
+
+    } // end of homePageContainerFeaturedEventsContainer
+
 
     // ==============================
-    // div #3
+    // div #2
     // ==============================
 
-    .homePageContainerContentContainer1 {
+    .homePageContainerNewsletterRegistrationContainer {
 
-        grid-area             : div3;
-        grid-row              : 3 / 4;
-        grid-column           : 2 / 12;
-        z-index               : 1;
+        display               : grid;
+        grid-template-columns : 1fr 1fr;
+        grid-template-areas   : "image rightDiv"; // used grid-template-areas to make the 2 child
+        // elements line up horizontally and I could have done this with flexbox but I wanted
+        // to use the grid-gap property so I decided to use grid instead
+        grid-area             : div2;        
+        align-content         : center;
+        grid-column           : 1 / -1;
+        grid-gap              : 0 12.0rem;
 
-        > h3 {
+        // ==============================
+        // textured image
+        // ==============================
 
-            margin  : 10.0rem 0 8.0rem 0;
-            padding : 0 0 0 0;
+        // background-image: linear-gradient( to top, rgba( 11, 163, 96, 1) 0%, rgba(60, 186, 146, 1) 100% );
+        // background-image: linear-gradient( to right, rgba( 0, 219, 222, 1 ) 0%, rgba( 252, 0, 255, 1 ) 100% );
+        // background-image: linear-gradient( to top, rgba( 0, 198, 251, 1 ) 0%, rgba( 0, 91, 234, 1 ) 100% );
+        // background-image: linear-gradient( to right, rgba( 59, 181, 177, 1 ) 0%, rgba( 61, 153, 190, 1 ) 31%, rgba( 86, 49, 122, 1 ) 100% );
+        // background-image: linear-gradient( -225deg, rgba( 71, 59, 123, 1 ) 0%, #3584A7 51%, rgba( 53, 132, 167, 1 ) 100% );
+        // background-color: rgba( 200, 200, 200, 1 );
+        background-image : url( ../public/textures/linen.png );
+   
+        > .homePageContainerNewsletterRegistrationContainerLeft {
 
-            font-family    : $font-primary-4;
-            font-size      : 2.4rem;
-            font-weight    : 700;
-            color          : $gray-225;
-            letter-spacing : 1px;
-            text-align     : center;
+            grid-area    : image;
+            justify-self : end; // I had to use justify-self to make the 2 child elements
+            // line up next to each other in the middle of the viewport
+            width        : 600px;
+            height       : 600px;
 
-        } // end of h3
+            background-image      : linear-gradient( to bottom, rgba( 61, 71, 98, 0.2 ),  rgba( 81, 91, 118, 0.2 ) ), url( ../public/images/people_02.jpg );
+            background-position   : center; 
+            background-size       : cover;
+            background-blend-mode : multiply;
+            background-color      : $blue-100;
 
-    } // end of homePageContainerContentContainer1
+            @media all and ( max-width : $bp-1280 ) {
+
+                align-self    : end;
+                justify-self  : center;
+    
+            }
+
+            /*
+            > img {
+
+                display : block; // get rid of the extra space at the bottom of the image
+            }
+            */
+
+        } // end of homePageContainerNewsletterRegistrationContainerLeft
+
+        > .homePageContainerNewsletterRegistrationContainerRight {
+
+            display       : grid;
+            grid-area     : rightDiv;
+            align-content : center; // place element in the vertical center of container left
+            // above
+            width         : 800px; // visual preference
+
+        } // end of homePageContainerNewsletterRegistrationContainerRight
+
+    } // end of homePageContainerNewsletterRegistrationContainer
 
 } // end of homePageContainer
 

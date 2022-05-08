@@ -13,12 +13,17 @@
 .newsletterContainer {
 
     display         : grid;
+    align-content   : center;
     justify-content : center;
-    margin          : 8.0rem 0 1.0rem 0;
+    height          : 400px;
 
-    border : 1px solid rgba( 150, 150, 150, 1 );
+    border-radius: 6px 6px 6px 6px;
 
     text-align : center;
+
+    // background : rgba( 44, 79, 151, 0.75 );
+    // background : rgba( 220, 220, 220, 0.05 );
+    background : $steel-blue-200;
 
     // div 1
     .newsletterContainerHeading {
@@ -134,7 +139,7 @@
 
                     letter-spacing : 1px;
 
-                    background : sienna;
+                    background : $red-100;
             
                     // had to do " outline : none; " in order to get rid of the weird outline or coloring
                     // around the button element after clicking the button
@@ -142,7 +147,7 @@
             
                     &:hover {
             
-                        background : $sienna-dark;
+                        background : $red-300;
             
                     }
 

@@ -816,33 +816,42 @@ export default Nav;
 // let's surround the anchor tags with the Link component and then add the href attribute
 // to each Link component and then inside the Link component we have the anchor tags
 
+// import in the useState hook
+import { Fragment, useEffect, useRef, useState } from 'react';
 // import in the Link component
 import Link from 'next/link';
 // import in the useRouter(); hook
 import { useRouter } from 'next/router';
-// import in the useSession(); hook and the signOut function
-import { useSession, signOut } from 'next-auth/react';
+// import in the useSession(); hook
+import { useSession } from 'next-auth/react';
 // import in the SearchBox component
-import SearchBoxComponent from '../search-box/search-box-v2';
-// import in Simple Icons
+import SearchBoxComponent from '../search-box/search-box-v3';
+// import in the Side Menu component
+import SideMenuComponent from '../../components/side-menu/side-menu';
+// import in Simple Icons Next logo
 import { SiNextDotJs } from 'react-icons/si';
-// import in BoxIcons
-import { BiLogInCircle } from 'react-icons/bi';
-// import in Font Awesome
-import { FaUser } from 'react-icons/fa';
-// import in VS Code Icons
-import { VscSignOut } from 'react-icons/vsc';
-// import in Font Awesome
-import { FaMicrophone } from 'react-icons/fa';
+// import in Font Awesom search icon
+import { FaSearch } from 'react-icons/fa';
 // import in our stylesheet
 import styles from './nav.module.scss';
 
 
-const Nav = () => {
+export default function NavComponent() {
 
     // ==============================
     // component state
     // ==============================
+
+    // remember this initial state can be updated by using client side data fetching as
+    // needed
+
+    // remember we don't need to set component level state in order to see the data in the
+    // page source; however, it makes sense to set component level state if we will use
+    // client side data fetching to update the data as needed
+
+    // set component level state
+    const [ showSearchBox, setShowSearchBox ] = useState( false );
+    const [ showSideMenu, setShowSideMenu ]   = useState( false );
 
     // ==============================
     // destructure props
@@ -851,6 +860,21 @@ const Nav = () => {
     // ==============================
     // useRef();
     // ==============================
+
+    // ==============================
+    // create DOM reference
+    // ==============================
+
+    // STEP 1
+
+    // use the useRef(); hook to create a reference to a DOM element and let's start by
+    // initializing a useRef variable and we will call these variables:
+    // " searchBoxContainerRef ", " searchBoxSearchIconRef " and " sideMenuContainerRef "
+    const searchBoxContainerRef  = useRef();
+    const searchBoxSearchIconRef = useRef();    
+    const sideMenuContainerRef   = useRef();
+
+    // End of STEP 1
 
     // ==============================
     // useRouter();
@@ -916,45 +940,30 @@ const Nav = () => {
     // useEffect();
     // ==============================
 
-    // ==============================
-    // handleLogout function
-    // ==============================
-
-    const handleLogout = async ( e ) => {
-
-        // e.preventDefault(); got rid of the following error:
-        /*
-            Unhandled Runtime Error
-            Error: Failed to load script /_next/static/chunks/pages/logout.js 
-        */
-        e.preventDefault();
+    // run useEffect anytime the showSearchBox state changes and since we have an if
+    // statement the effect will only run when searchBoxContainerRef.current is true
+    // or when the search box is displayed ( which what we want )
+    useEffect(() => {
 
         // ==============================
-        // call the signOut function
+        // slide the search box down and fade in after clicking the search icon
         // ==============================
 
-        // from the next auth documentation on how to avoid any flicker when signing out
+        // make sure the search box is displayed before running the animation
+        if ( searchBoxContainerRef.current ) {
+            
+            searchBoxContainerRef.current.style.opacity = 1;
 
-        // from the next auth documentation:
-        // "If you pass redirect: false to signOut, the page will not reload. The session
-        // will be deleted, and the useSession hook is notified, so any indication about
-        // the user will be shown as logged out automatically. It can give a very nice
-        // experience for the user."
-        const data = await signOut(
-            { 
-                redirect    : false,
-                callbackUrl : "http://localhost:3016"
-            }
-        );
+            searchBoxContainerRef.current.style.transform = 'translate3d( 0, 0, 0 )';
 
-        // from the next auth documentation:
-        // " If you need to redirect to another page but you want to avoid a page reload,
-        // you can try: const data = await signOut({redirect: false, callbackUrl: "/foo"})
-        // where data.url is the validated url you can redirect the user to without any
-        // flicker by using Next.js's useRouter().push(data.url) "        
-        router.push( data.url );
+        }
 
-    } // end of handleLogout
+        // clean up function
+        return () => {
+            
+        }
+
+    }, [ showSearchBox ] ) // end of useEffect
 
     // remember that as soon as we call the signOut function the session object will change
     // from true to false or null and next.js will clear out the next-auth-session-token cookie
@@ -978,23 +987,13 @@ const Nav = () => {
         // get the user last name initial
         const userLastNameInitial = userLastName.slice( 0, 1 ).toUpperCase();
 
-        if ( userFirstName.length < 9 ) {
+        // construct the const userInitials
+        const userInitials = `${ userFirstNameInitial }${ userLastNameInitial }`;
 
-            // construct the const userName
-            const userName = `${ userFirstName } ${ userLastNameInitial }`;
-
-            return userName;
-
-        } else {
-
-            // construct the const userInitials
-            const userInitials = `${ userFirstNameInitial }${ userLastNameInitial }`;
-
-            return userInitials;
-
-        } // end of if else
+        return userInitials;
 
     } // end of handleUserName
+
 
     // ==============================
     // handleSearch function
@@ -1002,6 +1001,9 @@ const Nav = () => {
 
     const handleSearch = async ( searchTerm ) => {
 
+        // make sure we close the search box before going to the search term page
+        setShowSearchBox( !showSearchBox );
+    
         // since handleSearch is not part of a form submission there is no need to call
         // e.preventDefault();
 
@@ -1017,109 +1019,153 @@ const Nav = () => {
 
     return (
 
-        <nav className={ styles.navContainer }>
+        <Fragment>
 
-            <div className={ styles.navContainerLeft }>
+            {
 
-                <h4>
+                showSearchBox ? (
 
-                    <Link href="/">
-                        <a>
-                            <SiNextDotJs style={ { verticalAlign: '-5px', fontSize: '3.6rem' } } />
-                            &nbsp;&nbsp;Next
-                        </a>
-                    </Link>
+                    // ==============================
+                    // create DOM reference
+                    // ==============================
 
-                </h4>
+                    // STEP 2 ( see below )
 
-            </div>
+                    // tie the initialized useRef variable from above into a specific DOM element
+                    // so that we can reference that DOM element in our code
 
-            <div className={ styles.navContainerRight }>
+                    <div className={ styles.backgroundOverlay }>
 
-                <ul>
+                        <div
+                            className={ styles.backgroundOverlaySearchBoxContainer }
+                            ref={ searchBoxContainerRef }
+                        >
 
-                    {
-                    /*
-                    { /* show the events tab at all times */ /* }
-                    <li>
-                        <Link href="/events-dj">
-                            <a>
-                                <FaMicrophone style={ { verticalAlign: '-4px', fontSize: '2.15rem' } } />
-                                &nbsp;&nbsp;DJ Events
-                            </a>
-                        </Link>
-                    </li>
-                    */
-                    }
+                            <SearchBoxComponent 
+                                onSearch={ handleSearch }
+                                resetShowSearchBox={ () => setShowSearchBox( !showSearchBox ) }
+                            />
 
-                    { /* show the events tab at all times */ }
-                    <li>
-                        <Link href="/events">
-                            <a>
-                                <FaMicrophone style={ { verticalAlign: '-4px', fontSize: '2.15rem' } } />
-                                &nbsp;&nbsp;Events
-                            </a>
-                        </Link>
-                    </li>
+                        </div>
 
-                    { /* show signin tab only if we're not authenticated and the app is not loading */ }
-                    {
-                        ( status === "unauthenticated" && status !== "loading" ) && (
-                            <li>
-                                <Link href="/signin">
+                    </div>
+
+                ) : (
+
+                    <nav className={ styles.navContainer }>
+
+                        <div className={ styles.navContainerLeft }>
+
+                            <h4>
+
+                                <Link href="/">
                                     <a>
-                                        <BiLogInCircle style={ { verticalAlign: '-3.5px', fontSize: '2.15rem' } } />
-                                        &nbsp;&nbsp;Sign In
+                                        <SiNextDotJs style={ { verticalAlign: '-5px', fontSize: '3.6rem' } } />
+                                        &nbsp;&nbsp;Next
                                     </a>
                                 </Link>
-                            </li>
-                        )
-                    }
 
-                    <SearchBoxComponent onSearch={ handleSearch } />
+                            </h4>
 
-                    { /* show profile tab only if were authenticated and logged in */ }
-                    {
-                        ( status === "authenticated" ) && (
-                            <li>
-                                <Link href="/profile">
-                                    <a>
-                                        <FaUser style={ { verticalAlign: '-2px', fontSize: '1.75rem' } } />
-                                        &nbsp;&nbsp;{ handleUserName( session.user.name ) } Profile
-                                    </a>
-                                </Link>
-                            </li>
-                        )
-                    }
+                        </div>
 
-                    { /* show the logout button only if were authenticated and logged in */ }
-                    {
-                        ( status === "authenticated" ) && (
-                            <li>
-                                <Link href="/logout">
-                                    <a 
-                                        onClick={ handleLogout }
+                        <div className={ styles.navContainerRight }>
+
+                            <ul>
+
+                                { /* show the EVENTS tab at all times */ }
+                                <li>
+                                    <Link href="/events">
+                                        <a>
+                                            Events
+                                        </a>
+                                    </Link>
+                                </li>
+
+                                { /* show the OUR STORY tab at all times */ }
+                                <li>
+                                    <Link href="/our-story">
+                                        <a>
+                                            Our Story
+                                        </a>
+                                    </Link>
+                                </li>
+
+                                { /* show the BLOG tab at all times */ }
+                                <li>
+                                    <Link href="/blog">
+                                        <a>
+                                            Blog
+                                        </a>
+                                    </Link>
+                                </li>
+
+                                { /* show SIGNIN tab only if we're not authenticated and the app is not loading */ }
+                                {
+                                    ( status === "unauthenticated" && status !== "loading" ) && (
+                                        <li>
+                                            <Link href="/signin">
+                                                <a>
+                                                    Sign In
+                                                </a>
+                                            </Link>
+                                        </li>
+                                    )
+                                }
+
+                                { /* show the SEARCH icon at all times */ }
+                                <li>
+                                    <button
+                                        onClick={ () => setShowSearchBox( !showSearchBox ) }
+                                        ref={ searchBoxSearchIconRef }
                                     >
-                                        <VscSignOut style={ { verticalAlign: '-4px', fontSize: '2.15rem' } } />
-                                        &nbsp;&nbsp;Logout
-                                    </a>
-                                </Link>
-                            </li>
-                        )
-                    }
+                                        <FaSearch style={ { verticalAlign: '-3px', fontSize: '1.75rem' } } />
+                                    </button>
+                                </li>
 
-                </ul>
 
-            </div>
+                                { /* show PROFILE tab only if were authenticated and logged in */ }
+                                {
+                                    ( status === "authenticated" ) && (
+                                        <li className={ styles.navContainerRightUserProfile }>
+                                                <a
+                                                    onClick={ () => setShowSideMenu( ( prevStatus ) => !prevStatus ) }
+                                                >
+                                                    { handleUserName( session.user.name ) }
+                                                </a>
+                                        </li>
+                                    )
+                                }
 
-        </nav>
+                                { /* show SIDE MENU only if were authenticated and logged in */ }
+                                {
+                                    ( status === "authenticated" ) && (
+
+                                        <SideMenuComponent
+                                            resetShowSideMenu={ () => setShowSideMenu( ( prevStatus ) => !prevStatus ) }
+                                            showSideMenu={ showSideMenu }
+                                        />
+
+                                    )
+                                    
+                                }
+
+                            </ul>
+
+                        </div>
+
+                    </nav>
+
+                )
+
+            }
+                
+        </Fragment>
 
     );
 
-}
+} // end of NavComponent
 
-
-export default Nav;
 
 
 

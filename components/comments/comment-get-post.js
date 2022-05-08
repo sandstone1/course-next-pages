@@ -18,8 +18,8 @@ import { Fragment, useCallback, useEffect, useState } from 'react';
 import ErrorMessageComponent from '../../components/error-message/em-comment-component';
 // import in the SuccessMessage component
 import SuccessMessageComponent from '../../components/success-message/sm-comment-component';
-// import in the Spinner component
-import Spinner from '../../components/spinner/spinner-v2';
+// import in the SpinnerCircleDark component
+import SpinnerCircleDark from '../../components/spinner/spinner-circle-dark';
 // import in the Comments icon
 import { FaComments } from 'react-icons/fa';
 // import in the scss file
@@ -269,12 +269,12 @@ export default function CommentGetandPostComponent( { eventId } ) {
             const data = await res.json();
 
             // STEP 4(c)
-            // set the error message
-            setFrontendErrorMessage( data.message );
-
-            // STEP 4(d)
             // once we get the data, set isLoading to false
             setIsLoading( false );
+
+            // STEP 4(d)
+            // set the error message
+            setFrontendErrorMessage( data.message );
 
             // STEP 4(e)
             // reset the component state
@@ -326,7 +326,14 @@ export default function CommentGetandPostComponent( { eventId } ) {
 
                 isLoading ? (
 
-                    <Spinner />
+                    // we had to add styles to the spinner component that were
+                    // specific to this component and therefore we added the div
+                    // and class name below
+                    <div className={ styles.spinnerContainer }>
+
+                        <SpinnerCircleDark />
+
+                    </div>
 
                 ) : frontendErrorMessage ? (
 
@@ -408,7 +415,7 @@ export default function CommentGetandPostComponent( { eventId } ) {
                                                     required
                                                     value={ name }
                                                     onChange={ (e) => setName( e.target.value ) }
-                                                />                        
+                                                />           
                                                 <label
                                                     htmlFor="comment-name"
                                                     className={

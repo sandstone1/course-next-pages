@@ -1,0 +1,153 @@
+
+
+// ==============================
+// PARTIAL IMPORTS
+// ==============================
+
+@import '../../styles/_color_variables.scss';
+@import '../../styles/_font_variables.scss';
+@import '../../styles/_mixins.scss';
+@import '../../styles/_responsive_breakpoints.scss';
+
+
+.searchBoxContainer {
+
+    display : flex; // flex will make the form and the close search box button line up
+    // horizontally
+
+    @media all and ( max-width : $bp-1280 ) {
+
+        display : none;
+
+    }
+
+    // the form
+    > form {
+
+        display               : grid;
+        grid-template-columns : repeat( 2, max-content );
+
+        // search button
+        > .searchBoxContainerFormButtonContainer {
+    
+            > button {
+    
+                @include button();
+    
+                display : block;
+    
+                padding : 0.8rem 2.2rem; // make sure padding lines up with the input box
+    
+                border        : none; // get rid of the default border
+                border-radius : 6px 0 0 6px; // get rid of the default radius
+    
+                font-family    : $font-primary-4;
+                font-size      : 1.75rem;
+                color          : $white;
+                letter-spacing : 0.5px;
+                text-transform : none;
+    
+                // background : rgba( 255, 255, 255, 0.15 );
+                background-color : $blue-325;
+    
+                transition : all 0.2s ease-out;
+    
+                @media all and ( max-width : $bp-375 ) {
+    
+                    padding : 1.0rem 1.5rem;
+    
+                }
+    
+                // hover and active selectors
+                &:hover, &:active {
+    
+                    background-color : $blue-350;
+    
+                } // end of li > button &:hover, &:active
+    
+            } // end of search button
+        
+        } // end of searchBoxContainerFormButtonContainer
+
+        // input
+        > input {
+
+            width   : 30.0rem; // needed to set the width for this element
+            padding : 0.85rem 2.0rem 0.85rem 1.6rem;
+
+            border        : none;
+            border-radius : 0 6px 6px 0;
+
+            font-family    : $font-primary-4;
+            font-size      : 1.6rem;
+            color          : $gray-900;
+            letter-spacing : 0.5px;
+
+            &:focus {
+
+                outline : none;
+
+                opacity : 1.0;
+
+            }
+
+            &::placeholder {
+
+                color : $gray-900;
+
+            }
+
+            // remove placeholder on focus and then replace placeholder on blur
+            &:focus::placeholder {
+
+                color : transparent;
+
+            }
+
+        } // end of input
+
+    } // end of form
+
+    // the close search button
+    > .searchBoxContainerCloseSearchContainer {
+
+        > button {
+
+            @include button();
+
+            display : block;
+            margin  : 0 0 0 6.0rem;
+            padding : 0.8rem 2.2rem; // make sure padding lines up with the input box
+
+            border        : none; // get rid of the default border
+            border-radius : 6px 6px 6px 6px; // get rid of the default radius
+
+            font-family    : $font-primary-4;
+            font-size      : 1.75rem;
+            color          : $white;
+            letter-spacing : 0.5px;
+            text-transform : none;
+
+            background-color : $gray-800;
+
+            transition : all 0.2s ease-out;
+
+            @media all and ( max-width : $bp-375 ) {
+
+                padding : 1.0rem 1.5rem;
+
+            }
+
+            // hover and active selectors
+            &:hover, &:active {
+
+                background-color : $gray-865;
+
+            } // end of li > button &:hover, &:active
+
+        } // end of close search button
+    
+    } // end of searchBoxContainerFormButtonContainer
+
+} // searchBoxContainer
+

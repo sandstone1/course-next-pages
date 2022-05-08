@@ -21,8 +21,8 @@ import { Fragment, useState } from 'react';
 import ErrorMessageNewsletterComponent from '../../components/error-message/em-newsletter-component';
 // import in the SuccessMessage component
 import SuccessMessageNewsletterComponent from '../../components/success-message/sm-newsletter-component';
-// import in the Spinner component
-import Spinner from '../../components/spinner/spinner-v2';
+// import in the SpinnerBounceDark component
+import SpinnerBounceDark from '../../components/spinner/spinner-bounce-dark';
 // import in the scss file
 import styles from './newsletter-registration.module.scss';
 
@@ -187,12 +187,12 @@ export default function NewsletterRegistrationComponent() {
             const data = await res.json();
 
             // STEP 4(c)
-            // set the error message
-            setFrontendErrorMessage( data.message );
-
-            // STEP 4(d)
             // once we get the data, set isLoading to false
             setIsLoading( false );
+
+            // STEP 4(d)
+            // set the error message
+            setFrontendErrorMessage( data.message );
 
             // STEP 4(e)
             // reset the component state
@@ -240,7 +240,7 @@ export default function NewsletterRegistrationComponent() {
 
                 isLoading ? (
 
-                    <Spinner />
+                    <SpinnerBounceDark />
 
                 ) : frontendErrorMessage ? (
 
@@ -265,8 +265,8 @@ export default function NewsletterRegistrationComponent() {
                         { /* div 1 */ }
                         <div className={ styles.newsletterContainerHeading }>
                         
-                            <h2 className={ styles.newsletterContainerHeadingH2 }>Sign in to stay updated!</h2>
-                        
+                            <h2 className={ styles.newsletterContainerHeadingH2 }>Register for our newsletter!</h2>
+
                         </div>
 
                         { /* div 2 */ }
@@ -293,7 +293,7 @@ export default function NewsletterRegistrationComponent() {
                                             styles.newsletterContainerContentContainer1FormEmailInputContainerLabelShrink
                                         }
                                     >
-                                        Email address
+                                        Please enter your email address
                                     </label>
                                 </div>
 
@@ -304,7 +304,7 @@ export default function NewsletterRegistrationComponent() {
                                         type="submit"
                                         className={ styles.newsletterContainerContentContainer1FormButtonContainerButton }
                                     >
-                                        Register Email
+                                        Register
                                     </button>
                         
                                 </div>

@@ -1605,10 +1605,9 @@ import { useRouter } from 'next/router';
 // import in the getSession and useSession hooks and the signIn function
 import { getSession, signIn, useSession } from 'next-auth/react';
 // import in the Spinner component
-import Spinner from '../components/spinner/spinner';
+import Spinner from '../components/spinner/spinner-bounce-dark';
 // import in the ErrorMessage component
 import ErrorMessage from '../components/error-message/em-signin-page';
-
 // import in our stylesheet
 import styles from './signin.module.scss';
 
@@ -1622,6 +1621,7 @@ const SignInPage = () => {
     // set component level state
     const [ email, setEmail ]                               = useState( '' );
     const [ password, setPassword ]                         = useState( '' );
+    const [ isLoading, setIsLoading ]                       = useState( false );
     const [ frontendErrorMessage, setFrontendErrorMessage ] = useState( '' );
 
     // ==============================
@@ -1677,6 +1677,13 @@ const SignInPage = () => {
     
         } // end of if
 
+        // initially, isLoading is set to true
+    
+        // remember we use the isLoading state primarily when we are communicating with the
+        // database from the frontend since there may be a short delay between the time from
+        // when the request is made to the time from when the server response is returned
+        setIsLoading( true );
+
         // ==============================
         // signIn function
         // ==============================
@@ -1702,24 +1709,39 @@ const SignInPage = () => {
             url: null
             [[Prototype]]: Object
         */
-        const result = await signIn( 
+        const result = await signIn(
+
             'credentials', // the name of the next auth provider
+
+            // config object
             {
                 redirect : false, // if we have an error then don't redirect the user
                 email    : email, // data sent along with the user sign in request
                 password : password // data sent along with the user sign in request
             }
+
         );
 
         // if there is an error message, set the frontendErrorMessage and then display that
         // message in the content below
         if ( result.error ) {
 
+            // once we get result, set isLoading to false
+            setIsLoading( false );
+
+            // set the frontend error message
             setFrontendErrorMessage( result.error );
+
+            // reset the component state
+            setEmail( '' );
+            setPassword( '' );
 
         } else {
 
             // if the sign in process was successfully then:
+
+            // set isLoading to false
+            setIsLoading( false );
 
             // redirect the user
             router.push( '/' );
@@ -1762,9 +1784,13 @@ const SignInPage = () => {
 
             {
 
-                ( status === "loading" ) ? (
+                isLoading ? (
 
-                    <Spinner />
+                    <div className={ styles.spinnerContainer }>
+
+                        <Spinner />
+
+                    </div>
 
                 ) : frontendErrorMessage ? (
 

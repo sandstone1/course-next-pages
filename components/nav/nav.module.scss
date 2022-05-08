@@ -6,9 +6,55 @@
 
 @import '../../styles/_color_variables.scss';
 @import '../../styles/_font_variables.scss';
+@import '../../styles/_mixins.scss';
 @import '../../styles/_responsive_breakpoints.scss';
 
 
+
+// background overlay > search box container div
+.backgroundOverlay {
+
+    position : fixed;
+    top      : 0%;
+    left     : 0%;
+    z-index  : 10;
+    width    : 100%;
+    height   : 100%;
+
+    background-color : rgba( 0, 0, 0, 0.65 );
+
+    // search box container
+    > .backgroundOverlaySearchBoxContainer {
+
+        display         : flex;
+        justify-content : center;
+        align-items     : center;
+        grid-column     : 2 / 12;
+        z-index         : 15;
+        margin          : 58.75px 0 0 0; // 160px ( header height ) - 42.5px
+        // ( search box height ) = 117.5px / 2 = 58.75px 
+
+        // ==============================
+        // slide the search box down and fade in after clicking the search icon
+        // ==============================
+
+        transition : all 0.4s ease-out;
+        opacity    : 0;
+        transform  : translate3d( 0, -20px, 0 ); // 58.75px ( distance to the top of the
+        // browser window ) + 42.5px ( search box height ) = 101.25
+
+        // however, I thought a lower number ( like 20px ) on the y axis looked better
+        // than 101.25px
+        
+    } // end of backgroundOverlaySearchBoxContainer
+
+} // end of backgroundOverlay
+
+
+
+
+
+// nav container
 // remember we have the header css grid styling affecting the nav container flex styling
 .navContainer {
 
@@ -28,6 +74,7 @@
 
     }
 
+    // nav left container
     .navContainerLeft {
 
         @media all and ( max-width : $bp-1280 ) {
@@ -43,6 +90,7 @@
     
         }
 
+        // logo
         > h4 > a {
 
             display: block;
@@ -68,23 +116,26 @@
 
     } // end of nav container left
 
+    // nav right container
     .navContainerRight {
 
+        // the nav right container > ul
         > ul {
 
-            display               : grid;
-            grid-template-columns : repeat( 3, auto );
-            align-items           : center;
+            display     : flex; // flex will make the navigation tabs line up horizontally
+            align-items : center; // make sure all the tabs are in the center of the container
 
+            // the navigation tabs
             > li > a {
 
                 display : block; // needed for animation
-                padding : 1.5rem 2.2rem;    
+                padding : 1.5rem 2.2rem;
 
                 font-family    : $font-primary-4;
                 font-size      : 1.75rem;
                 color          : $white;
                 letter-spacing : 0.5px;
+                text-transform : uppercase;
 
                 transition : all 0.2s ease-out;
 
@@ -96,7 +147,7 @@
 
             } // end of li > a
 
-            // hover and active selectors
+            // hover and active selectors for the navigation tabs
             > li > a:hover, > li > a:active {
 
                 border-radius : 6px;
@@ -115,8 +166,78 @@
             
                 }
 
-            } // end of li > > a:hover, > li > a:active
+            } // end of li > a:hover, li > a:active
 
+            // modify the user profile tab
+            > .navContainerRightUserProfile > a {
+
+                margin  : 0 0 0 1.8rem;
+                padding : 1.5rem 2.2rem;
+
+                border-radius: 50%;
+
+                background : $blue-400;
+
+                cursor     : pointer;
+                transition : all 0.3s ease-out;
+
+                // hover and active selectors
+                &:hover, &:active {
+
+                    // override the styles above
+                    padding : 1.5rem 2.2rem;
+
+                    // override the styles above
+                    border-radius: 50%;
+
+                    // override the styles above
+                    background : $blue-500;
+
+                } // end of navContainerRightUserProfile > a &:hover, &:active
+
+            } // end of navContainerRightUserProfile > a
+
+            // search icon button
+            > li > button {
+
+                    @include button();
+    
+                    display : block;    
+                    padding : 1.5rem 2.2rem; // make sure padding lines up with the input box
+    
+                    border        : none; // get rid of the default border
+                    border-radius : 6px 6px 6px 6px; // get rid of the default radius
+    
+                    font-family    : $font-primary-4;
+                    font-size      : 1.75rem;
+                    color          : $white;
+                    letter-spacing : 0.5px;
+                    text-transform : none;
+
+                    background-color : transparent;
+        
+                    transition : all 0.2s ease-out;
+    
+                    @media all and ( max-width : $bp-375 ) {
+    
+                        padding : 1.0rem 1.5rem;
+        
+                    }
+    
+                    // hover and active selectors
+                    &:hover, &:active {
+    
+                        border-radius : 6px;
+
+                        background-color : rgba( 255, 255, 255, 0.05 );
+        
+                        // move the background color up just a little to add a nice hoover effect
+                        transform: translate3d( 0, -3px, 0 );
+    
+                    } // end of li > button &:hover, &:active
+                
+            } // end of li > button
+    
         } // end of nav container right > ul
 
     } // end of nav container right
